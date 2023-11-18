@@ -183,26 +183,26 @@ const Payment = sequelize.define('Payment', {
 });
 
 // Define associations between the models
-User.hasOne(Customer, { foreignKey: 'userId' });
-Customer.belongsTo(User, { foreignKey: 'userId' });
+User.hasOne(Customer, { foreignKey: 'userID' });
+Customer.belongsTo(User, { foreignKey: 'userID' });
 
-BusCompany.hasMany(Bus, { foreignKey: 'companyId' });
-Bus.belongsTo(BusCompany, { foreignKey: 'companyId' });
+BusCompany.hasMany(Bus, { foreignKey: 'companyID' });
+Bus.belongsTo(BusCompany, { foreignKey: 'companyID' });
 
-Bus.hasMany(Trip, { foreignKey: 'busId' });
-Trip.belongsTo(Bus, { foreignKey: 'busId' });
+Bus.hasMany(Trip, { foreignKey: 'busID' });
+Trip.belongsTo(Bus, { foreignKey: 'busID' });
 
-Route.hasMany(Trip, { foreignKey: 'routeId' });
-Trip.belongsTo(Route, { foreignKey: 'routeId' });
+Route.hasMany(Trip, { foreignKey: 'routeID' });
+Trip.belongsTo(Route, { foreignKey: 'routeID' });
 
-Customer.hasMany(Booking, { foreignKey: 'customerId' });
-Booking.belongsTo(Customer, { foreignKey: 'customerId' });
+Customer.hasMany(Booking, { foreignKey: 'customerID' });
+Booking.belongsTo(Customer, { foreignKey: 'customerID' });
 
-Trip.hasMany(Booking, { foreignKey: 'tripId' });
-Booking.belongsTo(Trip, { foreignKey: 'tripId' });
+Trip.hasMany(Booking, { foreignKey: 'tripID' });
+Booking.belongsTo(Trip, { foreignKey: 'tripID' });
 
-Booking.hasOne(Payment, { foreignKey: 'bookingId' });
-Payment.belongsTo(Booking, { foreignKey: 'bookingId' });
+Booking.hasOne(Payment, { foreignKey: 'bookingID' });
+Payment.belongsTo(Booking, { foreignKey: 'bookingID' });
 
 
 // Export the models for use in other parts of the application

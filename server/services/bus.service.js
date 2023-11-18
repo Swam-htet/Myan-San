@@ -48,7 +48,9 @@ async function updateBus(id, body) {
 
 // delete bus by id
 async function deleteBus(id) {
-    return Bus.destroy({where: {id: id}});
+    let deleteBus = await Bus.destroy({where: {busID: id}});
+    console.log("DeleteBus", deleteBus);
+    return deleteBus;
 }
 
 module.exports = {

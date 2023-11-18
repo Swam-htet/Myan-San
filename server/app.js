@@ -15,12 +15,12 @@ const sequelize = require("./config/db.js");
 const models = require('./models/');
 
 // custom middleware imports
-let middleware = require("./middleware/index");
+let middleware = require("./middleware/");
 
 
 // route imports
 let indexRouter = require("./routes/index");
-let usersRouter = require("./routes/users");
+let usersRouter = require("./routes/users.route");
 let busRouter = require("./routes/buses.route");
 
 
@@ -43,7 +43,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
-
+// db configuration
 sequelize.sync({force: false})
     .then(() => {
         console.log('Models synchronized with the database.');
@@ -52,9 +52,16 @@ sequelize.sync({force: false})
         console.error('Error synchronizing models:', error);
     });
 
-// route register 
+// open routes
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/api", indexRouter);
+app.use("/api/users", usersRouter);
+
+
+// auth middleware test
+app.use(middleware.verifyUserToken);
+
+// authenticated routes
 app.use("/api/buses", busRouter);
 
 

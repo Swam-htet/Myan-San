@@ -47,7 +47,7 @@ async function createNewBus(req, res, next) {
     }
 }
 
-// update customer by id
+// update bus by id
 async function updateBusByID(req, res, next) {
     let id = req.params["id"];
     let updateBody = req.body;
@@ -63,25 +63,25 @@ async function updateBusByID(req, res, next) {
     }
 }
 
-// // delete customer by id
-// async function deleteBusByID(req, res, next) {
-//     let id = req.params["id"];
-//     try {
-//         let customer = await customerService.deleteCustomer(id);
-//         if (!customer) {
-//             res.status(400).json({ message: `Customer ID :${id} not found` });
-//         } else {
-//             res.status(200).json(customer);
-//         }
-//     } catch (error) {
-//         res.status(400).json({ message: `Customer ID :${id} not found` });
-//     }
-// }
+// delete bus by id
+async function deleteBusByID(req, res, next) {
+    let id = req.params["id"];
+    try {
+        let bus = await busService.deleteBus(id);
+        if (!bus) {
+            res.status(400).json({ message: `Bus ID :${id} not found` });
+        } else {
+            res.status(200).json(bus);
+        }
+    } catch (error) {
+        res.status(400).json({ message: `Bus ID :${id} not found` });
+    }
+}
 
 module.exports = {
     getAllBus,
     getBusByID,
     createNewBus,
     updateBusByID,
-    // deleteBusByID,
+    deleteBusByID,
 };

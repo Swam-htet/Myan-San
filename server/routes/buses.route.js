@@ -6,6 +6,8 @@ router.get('/', controller.getAllBus);
 router.get('/:id', controller.getBusByID);
 router.post('/', controller.createNewBus);
 router.put('/:id', controller.updateBusByID);
+router.delete('/:id', controller.deleteBusByID);
+
 
 
 

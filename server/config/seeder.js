@@ -35,6 +35,7 @@ const seedData = async () => {
                 lastName: faker.person.lastName(),
                 contactNumber: faker.phone.number(),
                 address: faker.location.streetAddress(),
+                userID: faker.number.int({min: 1, max:5})
             });
         }
         await Customer.bulkCreate(customers);
@@ -58,7 +59,7 @@ const seedData = async () => {
             buses.push({
                 busNumber: faker.number.int({min: 1, max: 20}),
                 capacity: faker.number.int({max: 30, min: 10}),
-                companyId: faker.number.int({min: 1, max: 5}),
+                companyID: faker.number.int({min: 1, max: 5}),
             });
         }
         await Bus.bulkCreate(buses);
