@@ -32,5 +32,12 @@
         name : String,
         licenseNumber: String
         },
+    - company : ObjectID
+
+- company 
+    - name : String
+    - address : Address
+    
+
 
 

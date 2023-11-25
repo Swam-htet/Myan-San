@@ -26,9 +26,9 @@ const BusSchema = new Schema({
         name: String,
         licenseNumber: String,
     },
-    companyID: {
+    company: {
         type: Schema.Types.ObjectId,
-        ref: 'companies'
+        ref: 'Company'
     }
 });
 

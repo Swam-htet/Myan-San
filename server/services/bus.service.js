@@ -2,28 +2,27 @@ let Bus = require("../models/bus.model");
 
 // get all bus
 async function getAllBus() {
-    return Bus.find();
+    return Bus.find().populate("company");
 }
 
 // get bus by id
 async function getBusByID(id) {
-    return Bus.findById(id);
+    return Bus.findById(id).populate("company");
 }
 
 // create bus
 async function createBus(bus) {
-    let newBus = new Bus(bus);
-    return newBus.save();
+    return new Bus(bus);
 }
 
 // update bus
 async function updateBusByID(id, body) {
-    return Bus.findByIdAndUpdate(id, body, {new: true});
+    return Bus.findByIdAndUpdate(id, body, {new: true}).populate("company");
 }
 
 // delete bus
 async function deleteBusByID(id) {
-    return Bus.findByIdAndDelete(id);
+    return Bus.findByIdAndDelete(id).populate("company");
 }
 
 module.exports = {

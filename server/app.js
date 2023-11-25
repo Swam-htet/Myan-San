@@ -5,7 +5,7 @@ let cookieParser = require("cookie-parser");
 let logger = require("morgan");
 let cors = require("cors");
 let dotenv = require("dotenv");
-const {connect} = require("mongoose");
+const mongoose = require("mongoose");
 
 
 // custom middleware imports
@@ -39,12 +39,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 // db configuration
-connect(process.env.DB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose
+    .connect(process.env.DB, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
     .then(() => {
-        console.log("MongoDB is connected");
+        console.log("MongoDB atlas connected");
     })
     .catch(console.log);
 

@@ -20,7 +20,8 @@ async function createStaff(staff) {
         userName: staff.userName,
         email: staff.email,
         dateOfBirth: new Date(staff.dateOfBirth),
-        password: hashPassword
+        password: hashPassword,
+        address: staff.address
     });
     return newStaff.save();
 }
