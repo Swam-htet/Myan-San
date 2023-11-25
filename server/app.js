@@ -17,6 +17,10 @@ let indexRouter = require("./routes/index");
 let staffRouter = require("./routes/staff.route");
 let busRouter = require("./routes/bus.route");
 let companyRouter = require("./routes/company.route");
+let townRouter = require("./routes/town.route");
+let travelRouter = require("./routes/route.route");
+
+
 
 
 
@@ -56,6 +60,10 @@ app.use("/api", indexRouter);
 app.use("/api/staff", staffRouter);
 app.use("/api/buses", busRouter);
 app.use("/api/companies", companyRouter);
+app.use("/api/towns", townRouter);
+app.use("/api/routes", travelRouter);
+
+
 
 
 

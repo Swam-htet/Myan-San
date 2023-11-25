@@ -1,7 +1,6 @@
 let {faker} = require('@faker-js/faker');
 let mongoose = require('mongoose');
 let dotenv = require("dotenv");
-let dayjs = require('dayjs');
 const bcrypt = require("bcrypt");
 
 
@@ -47,6 +46,12 @@ db.once('open', async () => {
 
     const Bus = require('../models/bus.model.js');
     await clearModelData(Bus);
+
+    const Town = require('../models/town.model.js');
+    await clearModelData(Town);
+
+    const Route = require('../models/route.model.js');
+    await clearModelData(Route);
 
 
     // staff fake data insert
@@ -115,7 +120,44 @@ db.once('open', async () => {
     }
     console.log("Bus data inserted");
 
-    mongoose.connection.close();
+
+    // town fake data
+    for (let i = 0; i < 10; i++) {
+        await Town.create(
+            {
+                name: faker.location.city(),
+                station: faker.location.streetAddress(),
+            }
+        )
+    }
+    console.log("Town data inserted");
+
+
+    // route fake data
+    for (let i = 0; i < 10; i++) {
+        let townList = [...await Town.find()].map(town => town._id);
+        let toTownID = faker.helpers.arrayElement(townList);
+        let fromTownID = faker.helpers.arrayElement(townList.filter(id => id !== toTownID));
+        await Route.create(
+            {
+                toTown: toTownID,
+                fromTown: fromTownID,
+                scheduleDate: new Date,
+                availableSeat: 30
+            }
+        )
+    }
+    console.log("Route data inserted");
+
+
+
+
+
+
+
+
+
+    db.close();
 
 
 });
