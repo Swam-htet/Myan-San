@@ -19,6 +19,8 @@ let busRouter = require("./routes/bus.route");
 let companyRouter = require("./routes/company.route");
 let townRouter = require("./routes/town.route");
 let travelRouter = require("./routes/route.route");
+let ticketRouter = require("./routes/ticket.route");
+
 
 
 
@@ -62,6 +64,8 @@ app.use("/api/buses", busRouter);
 app.use("/api/companies", companyRouter);
 app.use("/api/towns", townRouter);
 app.use("/api/routes", travelRouter);
+app.use("/api/tickets", ticketRouter);
+
 
 
 

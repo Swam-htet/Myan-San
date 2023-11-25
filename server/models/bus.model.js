@@ -18,13 +18,14 @@ const BusSchema = new Schema({
         type: Number,
         required: true,
     },
-    seatingCapacity: {
-        type: Number,
-        required: true,
-    },
     driver: {
         name: String,
         licenseNumber: String,
+    },
+    class: {
+        type: String,
+        enum: ['First Class', 'Business Class', "Economy Class", "Sleeper Bus"],
+        required: true,
     },
     company: {
         type: Schema.Types.ObjectId,
