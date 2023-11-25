@@ -1,18 +1,12 @@
 // node modules import
-let createError = require("http-errors");
 let express = require("express");
 let path = require("path");
 let cookieParser = require("cookie-parser");
 let logger = require("morgan");
 let cors = require("cors");
 let dotenv = require("dotenv");
+const {connect} = require("mongoose");
 
-// db config
-const sequelize = require("./config/db.js");
-
-
-// models import
-const models = require('./models/');
 
 // custom middleware imports
 let middleware = require("./middleware/");
@@ -20,8 +14,9 @@ let middleware = require("./middleware/");
 
 // route imports
 let indexRouter = require("./routes/index");
-let usersRouter = require("./routes/users.route");
-let busRouter = require("./routes/buses.route");
+let staffRouter = require("./routes/staff.route");
+let busRouter = require("./routes/bus.route");
+let companyRouter = require("./routes/company.route");
 
 
 
@@ -44,26 +39,30 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 // db configuration
-sequelize.sync({force: false})
+connect(process.env.DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
     .then(() => {
-        console.log('Models synchronized with the database.');
+        console.log("MongoDB is connected");
     })
-    .catch((error) => {
-        console.error('Error synchronizing models:', error);
-    });
+    .catch(console.log);
+
 
 // open routes
 app.use("/", indexRouter);
 app.use("/api", indexRouter);
-app.use("/api/users", usersRouter);
+app.use("/api/staff", staffRouter);
+app.use("/api/buses", busRouter);
+app.use("/api/companies", companyRouter);
+
+
 
 
 // auth middleware test
-app.use(middleware.verifyUserToken);
+// app.use(middleware.verifyUserToken);
 
 // authenticated routes
-app.use("/api/buses", busRouter);
-
 
 // catch 404 and forward to error handler
 app.use(middleware.NotFound);

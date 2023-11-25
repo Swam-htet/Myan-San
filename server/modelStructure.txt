@@ -1,0 +1,36 @@
+-   staff
+-   drivers
+-   bus_companies
+-   buses
+
+
+- address
+    - street : String
+    - city : String
+    - state : String
+    - postalCode : String
+    - country : String
+
+- staff
+    - firstName : String
+    - lastName : String
+    - userName : String
+    - email : String
+    - password : String
+    - dateOfBirth : Date
+    - startDate : Date
+    - address: Address
+    - role : admin | staff
+
+- bus
+    - registrationNumber : String
+    - make : String
+    - model : String
+    - year : number
+    - seatingCapacity : number
+    - driver : {
+        name : String,
+        licenseNumber: String
+        },
+
+

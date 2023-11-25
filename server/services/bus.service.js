@@ -1,62 +1,35 @@
-let {Bus, BusCompany} = require("../models/");
+let Bus = require("../models/bus.model");
 
 // get all bus
 async function getAllBus() {
-    return Bus.findAll({
-        include: [
-            {
-                model: BusCompany,
-                attributes: ['companyID', 'companyName', 'contactNumber', 'address'],
-            },
-        ],
-    });
+    return Bus.find();
 }
 
 // get bus by id
 async function getBusByID(id) {
-    let bus = await Bus.findByPk(id, {
-        include: [
-            {
-                model: BusCompany,
-                attributes: ['companyID', 'companyName', 'contactNumber', 'address'],
-            }
-        ]
-    });
-    // console.log("Bus - ", bus);
-    return bus;
+    return Bus.findById(id);
 }
-
 
 // create bus
-async function createNewBus(bus) {
-    let newBus = await Bus.create({
-        busNumber: bus.busNumber,
-        companyId: bus.companyId,
-        capacity: bus.capacity
-    });
-    return newBus;
+async function createBus(bus) {
+    let newBus = new Bus(bus);
+    return newBus.save();
 }
 
-// update bus by id
-async function updateBus(id, body) {
-    return Bus.update(body, {
-        where: {
-            busID: id,
-        }
-    });
+// update bus
+async function updateBusByID(id, body) {
+    return Bus.findByIdAndUpdate(id, body, {new: true});
 }
 
-// delete bus by id
-async function deleteBus(id) {
-    let deleteBus = await Bus.destroy({where: {busID: id}});
-    console.log("DeleteBus", deleteBus);
-    return deleteBus;
+// delete bus
+async function deleteBusByID(id) {
+    return Bus.findByIdAndDelete(id);
 }
 
 module.exports = {
     getAllBus,
     getBusByID,
-    createNewBus,
-    updateBus,
-    deleteBus
+    createBus,
+    updateBusByID,
+    deleteBusByID
 }
