@@ -34,9 +34,8 @@ async function creatStaff(req, res, next) {
     let staff_data = req.body;
     try {
         let staff = await staffService.createStaff(staff_data);
-        let payload = {id: staff._id};
-        const token = jwt.sign(payload, process.env.TOKEN_SECRET);
-        res.status(201).send({token});
+
+        res.status(200).send({newStaff: staff, message: "Staff Account Creation is Success."});
     } catch (e) {
         console.log("Error - ", e);
         res.status(400).send({message: "Staff already existed"});
@@ -50,9 +49,14 @@ async function staffLogin(req, res, next) {
         let staff = await staffService.staffLogin(staffData);
         let payload = {
             id: staff._id,
+            role: staff.role,
         }
-        let token = await jwt.sign(payload, process.env.TOKEN_SECRET);
-        res.status(200).send({token});
+        const options = {
+            expiresIn: '1h',
+        };
+
+        let token = await jwt.sign(payload, process.env.TOKEN_SECRET, options);
+        res.status(200).send({token, message: "Login Success, Taken expires in 1hr", role: staff.role});
     } catch (err) {
         console.log(err)
         res.status(401).send({message: "Invalid Staff"});

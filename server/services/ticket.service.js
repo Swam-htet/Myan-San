@@ -3,7 +3,7 @@ let Route = require("../models/route.model");
 
 
 async function getAllTicket() {
-    return Ticket.find();
+    return Ticket.find().populate("route");
 }
 
 async function getTicketByID(id) {

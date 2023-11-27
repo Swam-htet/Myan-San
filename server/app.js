@@ -20,6 +20,7 @@ let companyRouter = require("./routes/company.route");
 let townRouter = require("./routes/town.route");
 let travelRouter = require("./routes/route.route");
 let ticketRouter = require("./routes/ticket.route");
+const {checkRole, verifyUserToken} = require("./middleware");
 
 
 
@@ -56,10 +57,22 @@ mongoose
     .catch(console.log);
 
 
+
+
+
 // open routes
 app.use("/", indexRouter);
 app.use("/api", indexRouter);
 app.use("/api/staff", staffRouter);
+
+// auth middleware test
+// app.use(verifyUserToken, checkRole("admin"));
+
+
+
+
+
+// authenticated routes
 app.use("/api/buses", busRouter);
 app.use("/api/companies", companyRouter);
 app.use("/api/towns", townRouter);
@@ -70,12 +83,6 @@ app.use("/api/tickets", ticketRouter);
 
 
 
-
-
-// auth middleware test
-// app.use(middleware.verifyUserToken);
-
-// authenticated routes
 
 // catch 404 and forward to error handler
 app.use(middleware.NotFound);

@@ -59,7 +59,7 @@ db.once('open', async () => {
 
 
     // staff fake data insert
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 20; i++) {
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash("password", salt);
         await Staff.create({
@@ -77,7 +77,7 @@ db.once('open', async () => {
             },
             password: hashPassword,
             email: faker.internet.email(),
-            role: faker.helpers.arrayElement(['staff', 'admin'])
+            role: "staff"
 
         })
     }
@@ -101,7 +101,7 @@ db.once('open', async () => {
     console.log("Company data inserted");
 
     // bus fake data
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 30; i++) {
 
         let companies = await Company.find();
         await Bus.create({
@@ -120,7 +120,7 @@ db.once('open', async () => {
 
 
     // town fake data
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
         await Town.create({
             name: faker.location.city(), station: faker.location.streetAddress(),
         })
@@ -129,7 +129,7 @@ db.once('open', async () => {
 
 
     // route fake data
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 20; i++) {
         let townList = [...await Town.find()].map(town => town._id);
         let toTownID = faker.helpers.arrayElement(townList);
         let fromTownID = faker.helpers.arrayElement(townList.filter(id => id !== toTownID));
@@ -151,7 +151,7 @@ db.once('open', async () => {
 
 
     // ticket fake data
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 30; i++) {
         let routeID = faker.helpers.arrayElement([...await Route.find()].map(route => route._id));
         let randomSeatNumber = Math.floor(Math.random() * 5) + 1;
         let route = await Route.findById(routeID);
@@ -160,7 +160,6 @@ db.once('open', async () => {
         if (randomSeatNumber < availableSeats.length) {
             let selectedSeats = Array.from({length: randomSeatNumber}, () => faker.helpers.arrayElement(availableSeats.map(seat => {
                 return {seatID: seat.seatID, _id: seat._id}
-
             })));
 
             console.log("Route - ", routeID);

@@ -7,7 +7,7 @@ async function verifyUserToken(req, res, next) {
     } else {
         try {
             token = token.split(" ")[1];
-            if (!token || token === null) {
+            if (!token) {
                 res.status(401).json({message: "Access Denied, unauthorized access"});
             } else {
                 let verifyUser = jwt.verify(token, process.env.TOKEN_SECRET);
