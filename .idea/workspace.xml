@@ -5,51 +5,95 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c857e01a-0162-4f0a-9cb0-c29cf17f422b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/public/slider/bus-slider-1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/slider/bus-slider-2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/slider/bus-slider-3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/slider/bus-slider-5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/public/slider/bus-slider-6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/bus-companies/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/buses/[id]/edit/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/buses/[id]/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/buses/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/staff/[id]/edit/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/staff/[id]/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/staff/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/staff/staff-register/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/travel-routes/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/lib/QueryWrapper.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/login/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/test/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/bus-companies/BusCompanyTable.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/buses/BusProfileCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/buses/BusTable.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/layouts/CustomFooter.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/layouts/CustomNavbar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/layouts/CustomOfficeLayout.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/login/LoginForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/shared/CustomBreadcrumb.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/shared/TableCell.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/shared/TableColumnHeader.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/staff/StaffEditForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/staff/StaffProfileCard.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/staff/StaffRegisterForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/staff/StaffTable.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/middleware/checkRole.middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/profiles/owner_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/profiles/owner_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/profiles/team_lead.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/slideShowImages/slidShow-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/slideShowImages/slidShow-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/slideShowImages/slidShow-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/public/slideShowImages/slidShow-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/general/page.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/layout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/routes/[id]/page.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/routes/edit/[id]/page.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/routes/new/page.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/routes/page.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/tickets/page.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/about-us/page.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/contact-us/page.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/travel-routes/[id]/page.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/app/travel-routes/page.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/layouts/DashboardLayout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/layouts/FooterLayout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/layouts/NavbarLayout.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/layouts/QueryWrapper.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/pages/Home.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/BusTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/CompanyTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/LoginForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/RouteCard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/RouteTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/SeatCard.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/StaffRegisterForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/StaffTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/TicketSearchForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/TicketTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/sharedComponents/TownTable.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/libs/endpoints.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useGetAllRoutes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useGetRouteById.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/client/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/layout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/tailwind.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/tailwind.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/staff.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/staff.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middleware/auth.middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middleware/auth.middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middleware/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middleware/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.eslintrc.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/jsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/next.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/postcss.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/next.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/slider/bus-slider-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/slider/bus-slider-2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/slider/bus-slider-3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/slider/bus-slider-4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/slider/bus-slider-5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/slider/bus-slider-6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/vercel.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/bus-companies/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/buses/[id]/edit/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/buses/[id]/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/buses/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/buses/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/staff/[id]/edit/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/staff/[id]/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/staff/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/staff/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/staff/staff-register/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/travel-routes/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/globals.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/layout.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/lib/QueryWrapper.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/login/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/login/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/test/page.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/bus-companies/BusCompanyTable.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/buses/BusProfileCard.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/buses/BusTable.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layouts/CustomFooter.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layouts/CustomNavbar.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layouts/CustomOfficeLayout.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/login/LoginForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/shared/CustomBreadcrumb.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/shared/TableCell.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/shared/TableColumnHeader.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/staff/StaffEditForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/staff/StaffProfileCard.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/staff/StaffRegisterForm.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/staff/StaffTable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/tailwind.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/route.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/route.controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/script/seeder.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/script/seeder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/services/route.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/route.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/services/ticket.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/ticket.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,6 +105,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="CSS File" />
+        <option value="TypeScript File" />
+        <option value="JSX File" />
         <option value="JavaScript File" />
       </list>
     </option>
@@ -91,8 +137,8 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;21.1.0&quot;,
-    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.8.10&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/swamhtet/Desktop/programming/application and projects/Myan-San/client/public/slider&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.10.4&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/swamhtet/Desktop/programming/application and projects/Myan-San/client/src/app/(office)&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -106,13 +152,15 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/client/public/slider" />
-      <recent name="$PROJECT_DIR$/client/src/components/bus-companies" />
-      <recent name="$PROJECT_DIR$/client/src/components/bus" />
+      <recent name="$PROJECT_DIR$/client/src/app/(office)" />
+      <recent name="$PROJECT_DIR$/client/public/profiles" />
       <recent name="$PROJECT_DIR$/client/src/app/(office)/buses" />
+      <recent name="$PROJECT_DIR$/client/src/app/(office)/dashboard" />
       <recent name="$PROJECT_DIR$/client/src/app/(office)/staff/[id]" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/libs" />
+      <recent name="$PROJECT_DIR$/client/src/app/(office)/staff/edit/[id]" />
       <recent name="$PROJECT_DIR$/client/src" />
     </key>
   </component>
@@ -161,7 +209,33 @@
       <workItem from="1700838355963" duration="41984000" />
       <workItem from="1700969174197" duration="30292000" />
       <workItem from="1701093021527" duration="1597000" />
-      <workItem from="1701097227207" duration="1182000" />
+      <workItem from="1701097227207" duration="2765000" />
+      <workItem from="1701139269739" duration="9000" />
+      <workItem from="1701143913729" duration="346000" />
+      <workItem from="1701147954994" duration="168000" />
+      <workItem from="1701151831249" duration="970000" />
+      <workItem from="1702002715123" duration="901000" />
+      <workItem from="1702047212912" duration="1979000" />
+      <workItem from="1702195173166" duration="243000" />
+      <workItem from="1702195436568" duration="3896000" />
+      <workItem from="1702315939937" duration="599000" />
+      <workItem from="1702679920634" duration="1226000" />
+      <workItem from="1702681574095" duration="723000" />
+      <workItem from="1702707637425" duration="599000" />
+      <workItem from="1702753868948" duration="1272000" />
+      <workItem from="1702782646149" duration="593000" />
+      <workItem from="1702789879885" duration="4765000" />
+      <workItem from="1702814724665" duration="3000" />
+      <workItem from="1702828745010" duration="1198000" />
+      <workItem from="1702992652588" duration="16672000" />
+      <workItem from="1703084636285" duration="6925000" />
+      <workItem from="1703161225802" duration="1235000" />
+      <workItem from="1703207652329" duration="1407000" />
+      <workItem from="1703254599668" duration="424000" />
+      <workItem from="1703263409368" duration="1215000" />
+      <workItem from="1703290609207" duration="543000" />
+      <workItem from="1703350955277" duration="27225000" />
+      <workItem from="1703420357850" duration="603000" />
     </task>
     <servers />
   </component>
@@ -203,33 +277,43 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/script/seeder.js</url>
-          <line>61</line>
+          <line>57</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/script/seeder.js</url>
-          <line>87</line>
+          <line>83</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/script/seeder.js</url>
-          <line>103</line>
+          <line>99</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/script/seeder.js</url>
-          <line>122</line>
+          <line>118</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/script/seeder.js</url>
-          <line>153</line>
+          <line>149</line>
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/script/seeder.js</url>
-          <line>131</line>
+          <line>127</line>
           <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/client/src/app/travel-routes/page.jsx</url>
+          <line>42</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/client/src/components/layouts/NavbarLayout.jsx</url>
+          <line>61</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

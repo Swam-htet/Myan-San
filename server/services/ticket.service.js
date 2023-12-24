@@ -3,11 +3,17 @@ let Route = require("../models/route.model");
 
 
 async function getAllTicket() {
-    return Ticket.find().populate("route");
+    return Ticket.find().populate({
+        path: "route", populate: ["fromTown", 'toTown', 'bus']
+    });
+    ;
 }
 
 async function getTicketByID(id) {
-    return Ticket.findById(id);
+    return Ticket.findById(id)
+        .populate({
+            path: "route", populate: ["fromTown", 'toTown', 'bus']
+        });
 }
 
 async function createTicket(ticket) {
@@ -15,17 +21,13 @@ async function createTicket(ticket) {
     let route = await Route.findById(ticket.route);
 
     let newTicket = new Ticket({
-        customer: ticket.customer,
-        route: ticket.route,
-        seats: ticket.selectedSeat,
+        customer: ticket.customer, route: ticket.route, seats: ticket.selectedSeat,
     });
 
     let updatedSeats = route.seats.map(seat => {
         if (ticket.selectedSeat.map(seat => seat.seatID).includes(seat.seatID)) {
             return {
-                seatID: seat.seatID,
-                _id: seat._id,
-                available: false
+                seatID: seat.seatID, _id: seat._id, available: false
             };
         }
         return seat;
@@ -46,7 +48,5 @@ async function createTicket(ticket) {
 
 
 module.exports = {
-    getAllTicket,
-    getTicketByID,
-    createTicket,
+    getAllTicket, getTicketByID, createTicket,
 }

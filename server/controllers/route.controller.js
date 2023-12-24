@@ -1,15 +1,16 @@
 const routeService = require("../services/route.service");
 
 async function getAllRoute(req, res, next) {
+    const queryParams = req.query;
     try {
-        let routes = await routeService.getAllRoute();
+        let routes = await routeService.getAllRoute(queryParams);
         if (routes) {
             res.status(200).json(routes);
         } else {
-            res.status(400).json({message: "Route not found"});
+            res.status(200).json([]);
         }
     } catch (error) {
-        res.status(400).json({message: `Route not found`});
+        res.status(200).json([]);
     }
 
 }

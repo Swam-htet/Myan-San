@@ -1,20 +1,21 @@
-import React from "react";
-import LoginForm from "@/components/login/LoginForm";
+'use client';
 
-export const metadata = {
-    title: "Login ",
-};
+import LoginForm from "@/components/sharedComponents/LoginForm";
 
 
-const LoginPage = () => {
+export default function LoginPage() {
+
+    const handleSubmit = (values) => {
+        console.log('Login submitted:', values);
+    };
+
     return (
-        <main className="min-h-screen w-screen">
-            <div className={'flex justify-center'}>
-                <LoginForm/>
+        <main className={'container py-4'}>
+            <h1 className={'text-center'}>Staff Login</h1>
+            <div style={{maxWidth:"600px",margin:"0 auto"}}>
+                <LoginForm onSubmit={handleSubmit}/>
             </div>
+
         </main>
-    );
-};
-
-
-export default LoginPage;
+    )
+}

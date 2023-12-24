@@ -3,25 +3,28 @@
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import BusTable from "@/components/sharedComponents/BusTable";
+import {IoMdAdd} from "react-icons/io";
+import CompanyTable from "@/components/sharedComponents/CompanyTable";
+import TownTable from "@/components/sharedComponents/TownTable";
 import Modal from "react-bootstrap/Modal";
 import {Button} from "react-bootstrap";
-import {IoMdAdd} from "react-icons/io";
 
-export default function BusListPage() {
+export default function GeneralListPage() {
+
     let router = useRouter();
-    const [data, setData] = useState(null);
+    const [companyData, setCompanyData] = useState(null);
+    const [townData, setTownData] = useState(null);
 
     const [showAddModal, setShowAddModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    console.log("data", data);
+
     const [error, setError] = useState(null);
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/buses');
-                setData(response.data);
+                const response = await axios.get('http://localhost:4000/api/companies');
+                setCompanyData(response.data);
             } catch (error) {
                 setError(error);
             }
@@ -30,7 +33,18 @@ export default function BusListPage() {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/towns');
+                setTownData(response.data);
+            } catch (error) {
+                setError(error);
+            }
+        };
 
+        fetchData();
+    }, []);
 
     const addModalHandler = () => {
         setShowAddModal(!showAddModal);
@@ -41,19 +55,35 @@ export default function BusListPage() {
         setShowDeleteModal(!showDeleteModal);
     }
 
+
     return (
         <main>
-            <div className={'d-flex justify-content-between align-items-center my-3'}>
-                <h1>Bus Management</h1>
-                <button className={'btn btn-primary'} onClick={addModalHandler}>
-                    Add New Bus <IoMdAdd/>
-                </button>
+            <div className={'mb-5'}>
+                <div className={'d-flex justify-content-between my-3'}>
+                    <h3>Company Management</h3>
+                    <button className={'btn btn-primary'} onClick={addModalHandler}>
+                        Add New Company <IoMdAdd/>
+                    </button>
+                </div>
+                {
+                    companyData && <CompanyTable townList={companyData} deleteModalHandler={deleteModalHandler}/>
+                }
             </div>
-            {
-                data && <BusTable busList={data} deleteModalHandler={deleteModalHandler}/>
-            }
 
-            {/*     add new bus modal box     */}
+
+            <div className={'mb-5'}>
+                <div className={'d-flex justify-content-between my-3'}>
+                    <h3>Town Management</h3>
+                    <button className={'btn btn-primary'} onClick={addModalHandler}>
+                        Add New Town <IoMdAdd/>
+                    </button>
+                </div>
+                {
+                    townData && <TownTable townList={townData} deleteModalHandler={deleteModalHandler}/>
+                }
+            </div>
+
+            {/*     add new modal box     */}
             <Modal show={showAddModal} onHide={addModalHandler}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
@@ -70,7 +100,7 @@ export default function BusListPage() {
             </Modal>
 
 
-            {/*     delete bus confirm modal box     */}
+            {/*     delete confirm modal box     */}
             <Modal show={showDeleteModal} onHide={() => {
                 setShowDeleteModal(!showDeleteModal)
             }}>

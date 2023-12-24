@@ -1,8 +1,15 @@
 let Route = require("../models/route.model");
 const {faker} = require("@faker-js/faker");
 
-async function getAllRoute() {
-    let routes = await Route.find().populate('fromTown')
+async function getAllRoute(params) {
+    const filteredParams = Object.fromEntries(
+        Object.entries(params).filter(([key, value]) => value !== '')
+    );
+
+
+    // Execute the query with population
+    const routes = await Route.find()
+        .populate('fromTown')
         .populate('toTown')
         .populate({
             path: 'bus',
@@ -11,19 +18,24 @@ async function getAllRoute() {
                 model: 'Company',
             },
         });
+
     return routes;
+
+
 }
 
 async function getRouteByID(id) {
-    return Route.findById(id).populate('fromTown')
+    return Route.findById(id)
+        .populate('fromTown')
         .populate('toTown')
         .populate({
-            path: 'bus',
-            populate: {
-                path: 'company',
-                model: 'Company',
-            },
-        });
+            path: "bus",
+            populate:{
+                path:"company",
+                model: "Company",
+            }
+        })
+
 }
 
 async function createRoute(route) {

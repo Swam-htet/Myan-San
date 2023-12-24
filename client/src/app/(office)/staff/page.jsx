@@ -1,48 +1,93 @@
 'use client';
 
-import React from "react";
-import CustomOfficeLayout from "@/components/layouts/CustomOfficeLayout";
-import StaffTable from "@/components/staff/StaffTable";
-import {useQuery} from "@tanstack/react-query";
-import axios from "axios";
-import {Button} from "antd";
 import {useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import StaffTable from "@/components/sharedComponents/StaffTable";
+import Modal from "react-bootstrap/Modal";
+import {Button} from "react-bootstrap";
+import {IoMdAdd} from "react-icons/io";
 
-
-let URL = "http://localhost:4000/api/staff";
-
-
-const StaffManagementPage = () => {
+export default function StaffListPage() {
     let router = useRouter();
+    const [showAddModal, setShowAddModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [data, setData] = useState([]);
 
-    let {data, isError, isLoading, error} = useQuery({
-        queryKey: ["staff"],
-        queryFn: async () => {
-            let {data} = await axios.get(URL);
-            return data.map((item, index) => {
-                return {key: index + 1, ...item}
-            });
+    console.log("data", data);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/api/staff');
+                setData(response.data);
+            } catch (error) {
+                setError(error);
+            }
+        };
 
-        }
-    });
+        fetchData();
+    }, []);
 
-    return (
-        <CustomOfficeLayout>
-            <main className="min-h-screen full px-10">
-                <div className={'flex justify-between py-10'}>
-                    <h1 className={'text-2xl font-[500'}>Staff Management Page</h1>
-                    <Button onClick={()=>router.push("/staff/staff-register")}>
-                         Add New Staff
-                    </Button>
-                </div>
-                {
-                    <StaffTable data={data} loading={isLoading}/>
-                }
-            </main>
-        </CustomOfficeLayout>
+    const addModalHandler = () => {
+        setShowAddModal(!showAddModal);
+    }
 
-    );
-};
+    const deleteModalHandler = (id) => {
+        console.log("Delete ID -", id);
+        setShowDeleteModal(!showDeleteModal);
+    }
 
 
-export default StaffManagementPage;
+    return (<main>
+        <div className={'d-flex justify-content-between align-items-center my-3'}>
+            <h1>Staf Management</h1>
+            <button className={'btn btn-primary'} onClick={addModalHandler}>
+                Add New Staff <IoMdAdd/>
+            </button>
+        </div>
+        {data &&
+            <div style={{overflowY: "scroll"}}><StaffTable staffList={data} deleteModalHandler={deleteModalHandler}/>
+            </div>}
+
+        {/*     add new staff modal box     */}
+        <Modal show={showAddModal} onHide={addModalHandler}>
+            <Modal.Header closeButton>
+                <Modal.Title>Modal heading</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={addModalHandler}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={addModalHandler}>
+                    Save Changes
+                </Button>
+            </Modal.Footer>
+        </Modal>
+
+
+        {/*     delete staff confirm modal box     */}
+        <Modal show={showDeleteModal} onHide={() => {
+            setShowDeleteModal(!showDeleteModal)
+        }}>
+            <Modal.Header closeButton>
+                <Modal.Title>Delete Confirm</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+            <Modal.Footer>
+                <Button variant="secondary" onClick={() => {
+                    setShowDeleteModal(!showDeleteModal)
+                }}>
+                    Close
+                </Button>
+                <Button variant="danger" onClick={() => {
+                    setShowDeleteModal(!showDeleteModal)
+                }}>
+                    Delete
+                </Button>
+            </Modal.Footer>
+        </Modal>
+
+    </main>)
+}

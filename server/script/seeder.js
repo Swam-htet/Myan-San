@@ -2,10 +2,6 @@ let {faker, fa, ro} = require('@faker-js/faker');
 let mongoose = require('mongoose');
 let dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
-const Town = require("../models/town.model");
-const Route = require("../models/route.model");
-const Ticket = require("../models/ticket.model");
-
 
 dotenv.config();
 
@@ -133,7 +129,7 @@ db.once('open', async () => {
         let townList = [...await Town.find()].map(town => town._id);
         let toTownID = faker.helpers.arrayElement(townList);
         let fromTownID = faker.helpers.arrayElement(townList.filter(id => id !== toTownID));
-        let availableSeat = 10;
+        let availableSeat = 30;
         let seatList = Array.from({length: availableSeat}).map((_, index) => {
             return {seatID: `ID-${index + 1}`}
         })
