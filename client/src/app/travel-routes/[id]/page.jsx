@@ -1,11 +1,15 @@
 'use client';
 
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {useRouter} from "next/navigation";
-import SeatCard from "@/components/sharedComponents/SeatCard";
+import SeatCard from "@/components/travel-route/SeatCard";
 import Modal from 'react-bootstrap/Modal';
-import {Button} from "react-bootstrap";
+import useGetRouteByID from "@/libs/hooks/useGetRouteById";
+import {IoArrowBack} from "react-icons/io5";
+import {IoIosBookmark} from "react-icons/io";
+import Loading from "@/components/layouts/Loading";
+import Error from "@/components/layouts/Error";
+import TicketBookingForm from "@/components/travel-route/TicketBookingForm";
 
 
 export default function TravelRoutesPage({params}) {
@@ -14,30 +18,36 @@ export default function TravelRoutesPage({params}) {
     const [seatList, setSeatList] = useState([]);
     const [bookModel, setBookModel] = useState(false);
 
-    console.log("SeatList -", seatList);
+    const initialValues = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        NRC: '',
+        address: {
+            street: '',
+            city: '',
+            state: '',
+            postalCode: '',
+            country: '',
+        },
+    };
 
-    const [error, setError] = useState(null);
+
+    let GetRouteByID = useGetRouteByID(params.id);
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
+        if (GetRouteByID.isSuccess) {
+            setData(GetRouteByID.data);
+        }
+    }, [GetRouteByID.data]);
 
-                const response = await axios.get('http://localhost:4000/api/routes/' + params.id);
-                setData(response.data);
-            } catch (error) {
-                setError(error);
-            }
-        };
-
-        fetchData();
-    }, []); // The empty dependency array ensures that this effect runs once when the component mounts
 
     const selectSeatHandler = (id) => {
         if (seatList.includes((id))) {
-            console.log("Removed")
             let updatedSeatList = seatList.filter((seat) => seat !== id);
             setSeatList(updatedSeatList);
         } else {
-            console.log("Added")
             setSeatList([...seatList, id])
         }
     }
@@ -45,17 +55,27 @@ export default function TravelRoutesPage({params}) {
     const modelHandler = () => {
         setBookModel(!bookModel);
     }
+
+
+    if (GetRouteByID.isError) {
+        return <Error message={GetRouteByID.error.message}/>
+    }
+    if (GetRouteByID.isLoading) {
+        return <Loading/>
+    }
+    
     return (
         <main className={'container'}>
             <div className={'row mt-4'}>
                 {
                     data ? <div>
-                        <div className={'d-flex justify-content-between'}>
-                            <h2>Bus Details</h2>
-                            <button className={'btn btn-outline-primary'} onClick={modelHandler}
-                                    disabled={!seatList.length}>Book
+                        <button className={'btn btn-outline-primary'} onClick={() => router.back()}>
+                            <IoArrowBack/>
+                            Back
                             </button>
-                        </div>
+
+                        <h2 className={'my-2'}>Bus Details</h2>
+
                         <div className={'row'}>
                             <div className={'col-6'}>
 
@@ -87,8 +107,25 @@ export default function TravelRoutesPage({params}) {
                             </div>
                         </div>
 
-                        <h3 className={'text-center'}>Seat Order</h3>
+
                         <div className={'row justify-content-center'} style={{margin: "0 auto", maxWidth: "900px"}}>
+                            <div className={'d-flex justify-content-between'}>
+                                <h3 className={'text-center'}>Seat Order</h3>
+
+                                <div className={'d-flex'}>
+                                    <button disabled={!seatList.length > 0}
+                                            className={'btn btn-outline-primary me-2'}
+                                            onClick={() => {
+                                                setSeatList([])
+                                            }}>
+                                        Cancel Selected Seat({seatList.length})
+                                    </button>
+                                    <button className={'btn btn-primary'} onClick={modelHandler}
+                                            disabled={!seatList.length}>Book
+                                        <IoIosBookmark/>
+                                    </button>
+                                </div>
+                            </div>
                             {data.seats.map((seat) => (
                                 <div className={'col-3 p-2'} key={seat._id}>
                                     <SeatCard data={seat} selectSeatHandler={selectSeatHandler} seatList={seatList}/>
@@ -96,25 +133,26 @@ export default function TravelRoutesPage({params}) {
                             ))}
                         </div>
 
-                        <Modal show={bookModel} onHide={modelHandler}>
+                        <Modal show={bookModel} onHide={modelHandler} size="xl" centered scrollable={true}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Booking Bus Ticket</Modal.Title>
                             </Modal.Header>
-                            
-                            <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-                            
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={modelHandler}>
-                                    Close
-                                </Button>
-                                <Button variant="primary" onClick={modelHandler}>
-                                    Save Changes
-                                </Button>
-                            </Modal.Footer>
+
+                            <Modal.Body>
+                                <TicketBookingForm initialValues={initialValues}
+                                                   resetBooking={() => {
+                                                       setBookModel(!bookModel);
+                                                       setSeatList([]);
+                                                   }}
+                                                   modelHandler={modelHandler}
+                                                   routeData={data}
+                                                   selectSeats={seatList}/>
+                            </Modal.Body>
+                         
                         </Modal>
 
 
-                    </div> : "Loading..."
+                    </div> : <Loading/>
                 }
             </div>
         </main>

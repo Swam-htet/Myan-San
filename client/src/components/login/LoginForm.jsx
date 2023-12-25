@@ -5,7 +5,7 @@ import {Button, Form as BootstrapForm} from 'react-bootstrap';
 import axios from "axios";
 import {setCookie} from "cookies-next";
 
-const LoginForm = () => {
+const LoginForm = ({handleSubmit}) => {
     const initialValues = {
         userName: '',
         email: '',
@@ -18,19 +18,6 @@ const LoginForm = () => {
         password: Yup.string().required('Password is required'),
     });
 
-    async function handleSubmit(values) {
-        // Implement your login logic here using the form values
-        // console.log('Login submitted:', values);
-
-        let {data} = await axios.post("http://localhost:4000/api/staff/login", values);
-        console.log("Login Result -", data);
-
-        if (data) {
-            setCookie("auth-token", data.token);
-        }
-
-
-    };
 
     return (
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>

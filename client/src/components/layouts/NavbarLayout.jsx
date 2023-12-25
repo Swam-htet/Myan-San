@@ -1,78 +1,83 @@
 'use client';
 
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Container, Nav, Navbar} from "react-bootstrap";
 import {useRouter} from "next/navigation";
-import {deleteCookie, getCookie, hasCookie} from "cookies-next";
+import {deleteCookie, hasCookie} from "cookies-next";
+import {useEffect, useState} from "react";
 
 export default function NavbarLayout() {
     let router = useRouter();
-    return <Navbar expand="lg" className="bg-body-tertiary">
-        <Container>
-            <Navbar.Brand href="#home" onClick={(e) => {
-                e.preventDefault();
-                router.push("/");
-            }}>Myan San</Navbar.Brand>
+    const [isClient, setIsClient] = useState(false)
 
-            <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
 
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto">
-
-                    <Nav.Link className={'mt-1'} onClick={(e) => {
+    return <>
+        {
+            isClient && <Navbar expand="lg" className="bg-body-tertiary">
+                <Container>
+                    <Navbar.Brand href="#home" onClick={(e) => {
                         e.preventDefault();
-                        router.push("/travel-routes");
-                    }}>
-                        Travel Routes
-                    </Nav.Link>
+                        router.push("/");
+                    }}>Myan San</Navbar.Brand>
 
-                    <Nav.Link className={'mt-1'} onClick={(e) => {
-                        e.preventDefault();
-                        router.push("/about-us");
-                    }}>
-                        About Us
-                    </Nav.Link>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
 
-                    <Nav.Link className={'mt-1'} onClick={(e) => {
-                        e.preventDefault();
-                        router.push("/contact-us");
-                    }}>
-                        Contact Us
-                    </Nav.Link>
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
 
-                    {/*     login order         */}
-                    <NavDropdown className={'mt-1'} title="User" id="basic-nav-dropdown">
+                            <Nav.Link className={'mt-1'} onClick={(e) => {
+                                e.preventDefault();
+                                router.push("/travel-routes");
+                            }}>
+                                Travel Routes
+                            </Nav.Link>
 
-                        <NavDropdown.Item onClick={(e) => {
-                            e.preventDefault();
-                            router.push("/staff");
-                        }}>
-                            Dashboard
-                        </NavDropdown.Item>
+                            <Nav.Link className={'mt-1'} onClick={(e) => {
+                                e.preventDefault();
+                                router.push("/about-us");
+                            }}>
+                                About Us
+                            </Nav.Link>
 
-                        <NavDropdown.Item onClick={(e) => {
-                            e.preventDefault();
-                            router.push("/login");
-                        }}>
-                            Login
-                        </NavDropdown.Item>
+                            <Nav.Link className={'mt-1'} onClick={(e) => {
+                                e.preventDefault();
+                                router.push("/contact-us");
+                            }}>
+                                Contact Us
+                            </Nav.Link>
 
 
-                        <NavDropdown.Divider/>
+                            {!hasCookie("auth-token") ? <>
+                                <Nav.Link className={'mt-1'} onClick={(e) => {
+                                    e.preventDefault();
+                                    router.push("/login");
+                                }}>
+                                    Login
+                                </Nav.Link> </> : <>
+                                <Nav.Link className={'mt-1'} onClick={(e) => {
+                                    e.preventDefault();
+                                    router.push("/staff");
+                                }}>
+                                    Dashboard
+                                </Nav.Link>
+                                <Nav.Link className={'mt-1'} onClick={() => {
+                                    deleteCookie("auth-token");
+                                    console.log("Cookie deleted");
+                                    router.push("/")
+                                }}>
+                                    Logout
+                                </Nav.Link>
+                            </>
 
-                        <NavDropdown.Item onClick={() => {
-                            if(getCookie('auth_token')){
-                                console.log("True token")
-                                deleteCookie('auth_token');
                             }
-                        }}>
-                            Logout
-                        </NavDropdown.Item>
-
-                    </NavDropdown>
 
 
-                </Nav>
-            </Navbar.Collapse>
-        </Container>
-    </Navbar>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        }
+    </>
 }

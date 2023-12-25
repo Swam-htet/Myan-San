@@ -3,7 +3,7 @@
 import {usePathname, useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import RouteTable from "@/components/sharedComponents/RouteTable";
+import RouteTable from "@/components/travel-route/RouteTable";
 import {IoMdAdd} from "react-icons/io";
 import Modal from "react-bootstrap/Modal";
 import {Button} from "react-bootstrap";

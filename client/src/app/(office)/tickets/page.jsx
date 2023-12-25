@@ -2,12 +2,12 @@
 
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
-import axios from "axios";
-import BusTable from "@/components/sharedComponents/BusTable";
-import Modal from "react-bootstrap/Modal";
-import {Button} from "react-bootstrap";
-import {IoMdAdd} from "react-icons/io";
-import TicketTable from "@/components/sharedComponents/TicketTable";
+import TicketTable from "@/components/ticket/TicketTable";
+import DeleteConfirmModel from "@/components/shared/DeleteConfirmModel";
+import Loading from "@/components/layouts/Loading";
+import Error from "@/components/layouts/Error";
+import useGetAllTicket from "@/libs/hooks/useGetAllTicket";
+import useDeleteTicketByIDMutation from "@/libs/hooks/useDeleteTicketByIDMutation";
 
 export default function BusListPage() {
     let router = useRouter();
@@ -15,28 +15,33 @@ export default function BusListPage() {
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    console.log("data", data);
+    const [deleteID, setDeleteID] = useState();
 
-    const [error, setError] = useState(null);
-    
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:4000/api/tickets');
-                setData(response.data);
-            } catch (error) {
-                setError(error);
-            }
-        };
+    let GetAllTicket = useGetAllTicket();
+    let DeleteTicketByIDMutation = useDeleteTicketByIDMutation();
 
-        fetchData();
-    }, []);
 
-    
     const deleteModalHandler = (id) => {
-        console.log("Delete ID -", id);
+        setDeleteID(id);
         setShowDeleteModal(!showDeleteModal);
     }
+
+
+    useEffect(() => {
+        if (GetAllTicket.isSuccess) {
+            setData(GetAllTicket.data);
+        }
+    }, [GetAllTicket.data]);
+
+    if (GetAllTicket.isLoading) {
+        return <Loading/>
+    }
+
+    if (GetAllTicket.isError) {
+        return <Error message={GetAllTicket.error.message}/>
+    }
+
+
 
     return (
         <main>
@@ -46,30 +51,19 @@ export default function BusListPage() {
             {
                 data && <TicketTable ticketList={data} deleteModalHandler={deleteModalHandler}/>
             }
-            
 
-            {/*     cancel ticket confirm modal box     */}
-            <Modal show={showDeleteModal} onHide={() => {
-                setShowDeleteModal(!showDeleteModal)
-            }}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Delete Confirm</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => {
-                        setShowDeleteModal(!showDeleteModal)
-                    }}>
-                        Cancel
-                    </Button>
-                    <Button variant="danger" onClick={() => {
-                        setShowDeleteModal(!showDeleteModal)
-                    }}>
-                        Confirm
-                    </Button>
-                </Modal.Footer>
-            </Modal>
 
+            <DeleteConfirmModel message={`Do you want to delete ticket ID -${deleteID}`}
+                                modelHandler={() => {
+                                    setShowDeleteModal(!showDeleteModal);
+                                }}
+                                submitHandler={() => {
+                                    console.log("Delete id -", deleteID);
+                                    // DeleteTicketByIDMutation.mutate(deleteID);
+                                    setShowDeleteModal(!showDeleteModal)
+
+                                }}
+                                showDeleteModel={showDeleteModal}/>
         </main>
     )
 }

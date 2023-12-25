@@ -1,33 +1,29 @@
 'use client';
 
 import {useEffect, useState} from "react";
-import {useRouter, useSearchParams} from "next/navigation";
-import RouteCard from "@/components/sharedComponents/RouteCard";
+import RouteCard from "@/components/travel-route/RouteCard";
 import useGetAllRoutes from "@/libs/hooks/useGetAllRoutes";
+import Loading from "@/components/layouts/Loading";
+import Error from "@/components/layouts/Error";
 
 export default function TravelRoutesPage() {
-    let router = useRouter();
-    const searchParams = useSearchParams();
     const [data, setData] = useState(null);
 
     let GetAllRoutes = useGetAllRoutes();
-
-    console.log("data", data);
-    const [error, setError] = useState(null);
 
 
     useEffect(() => {
         if (GetAllRoutes.isSuccess) {
             setData(GetAllRoutes.data);
         }
-    }, []);
+    }, [GetAllRoutes.data]);
 
     if (GetAllRoutes.isLoading) {
-        return <>Loading...</>
+        return <Loading/>
     }
 
     if (GetAllRoutes.isError) {
-        return <>{GetAllRoutes.error.message}</>
+        return <Error message={GetAllRoutes.error.message}/>
     }
 
 

@@ -1,7 +1,7 @@
 'use client';
 
 import {usePathname, useRouter} from "next/navigation";
-import {AiFillDelete, AiOutlineUser} from "react-icons/ai";
+import {AiFillDelete} from "react-icons/ai";
 import dayjs from "dayjs";
 
 export default function StaffTable({staffList, deleteModalHandler}) {
@@ -11,6 +11,7 @@ export default function StaffTable({staffList, deleteModalHandler}) {
         <table className="table table-bordered">
             <thead>
             <tr>
+                <th scope="col">No</th>
                 <th scope="col">ID</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
@@ -28,6 +29,7 @@ export default function StaffTable({staffList, deleteModalHandler}) {
                 staffList.map((staff, index) => {
                         return (<tr key={index}>
                                 <td>{index + 1}</td>
+                                <td>{staff._id}</td>
                                 <td>{staff.firstName}</td>
                                 <td>{staff.lastName}</td>
                                 <td>{staff.email}</td>

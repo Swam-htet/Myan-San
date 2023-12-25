@@ -27,7 +27,7 @@ async function createStaff(staff) {
 }
 
 async function deleteStaff(staffID) {
-    let staff = await Staff.findOneAndDelete(staffID);
+    let staff = await Staff.findByIdAndDelete(staffID);
     return staff;
 }
 

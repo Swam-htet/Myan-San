@@ -36,7 +36,7 @@ async function createTicket(req, res, next) {
         if (!ticket) {
             res.status(400).json({message: `Can't save Ticket`});
         } else {
-            res.status(201).json(ticket);
+            res.status(201).json({message: "Ticket Order Success", payload: ticket});
         }
     } catch (error) {
         res.status(400).json({message: `Can't save Ticket`});

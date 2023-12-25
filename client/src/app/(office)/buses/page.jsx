@@ -2,45 +2,68 @@
 
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
-import axios from "axios";
-import BusTable from "@/components/sharedComponents/BusTable";
+import BusTable from "@/components/bus/BusTable";
 import Modal from "react-bootstrap/Modal";
-import {Button} from "react-bootstrap";
 import {IoMdAdd} from "react-icons/io";
+import DeleteConfirmModel from "@/components/shared/DeleteConfirmModel";
+import Loading from "@/components/layouts/Loading";
+import Error from "@/components/layouts/Error";
+import useGetAllBuses from "@/libs/hooks/useGetAllBuses";
+import useDeleteBusByIDMutation from "@/libs/hooks/useDeleteBusByIDMutation";
+import BusForm from "@/components/bus/BusForm";
+import useCreateBusMutation from "@/libs/hooks/useCreateBusMutation";
+import useGetAllCompanies from "@/libs/hooks/useGetAllCompany";
 
 export default function BusListPage() {
     let router = useRouter();
     const [data, setData] = useState(null);
+    const [companies, setCompanies] = useState([])
 
     const [showAddModal, setShowAddModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [deleteID, setDeleteID] = useState();
 
-    console.log("data", data);
-    const [error, setError] = useState(null);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:4000/api/buses');
-                setData(response.data);
-            } catch (error) {
-                setError(error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-
+    let GetAllBuses = useGetAllBuses();
+    let DeleteBusByIDMutation = useDeleteBusByIDMutation();
+    let CreateBusMutation = useCreateBusMutation();
+    let GetAllCompanies = useGetAllCompanies();
 
     const addModalHandler = () => {
         setShowAddModal(!showAddModal);
     }
 
     const deleteModalHandler = (id) => {
-        console.log("Delete ID -", id);
+        setDeleteID(id);
         setShowDeleteModal(!showDeleteModal);
     }
 
+    const submitHandler = (values) => {
+        CreateBusMutation.mutate(values);
+        setShowAddModal(!showAddModal);
+
+    }
+
+
+    useEffect(() => {
+        if (GetAllBuses.isSuccess) {
+            setData(GetAllBuses.data);
+        }
+    }, [GetAllBuses.data]);
+
+    useEffect(() => {
+        if (GetAllCompanies.isSuccess) {
+            setCompanies(GetAllCompanies.data);
+        }
+    }, [GetAllCompanies.data]);
+
+
+    if (GetAllBuses.isLoading || GetAllCompanies.isLoading) {
+        return <Loading/>
+    }
+
+    if (GetAllBuses.isError) {
+        return <Error message={GetAllBuses.error.message}/>
+    }
     return (
         <main>
             <div className={'d-flex justify-content-between align-items-center my-3'}>
@@ -54,44 +77,28 @@ export default function BusListPage() {
             }
 
             {/*     add new bus modal box     */}
-            <Modal show={showAddModal} onHide={addModalHandler}>
+            <Modal show={showAddModal} onHide={addModalHandler} size={"xl"} scrollable={true}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={addModalHandler}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={addModalHandler}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
+                <Modal.Body>
+                    <BusForm companyList={companies} onSubmitHandler={submitHandler} modelHandler={addModalHandler}/>
+                </Modal.Body>
             </Modal>
 
 
             {/*     delete bus confirm modal box     */}
-            <Modal show={showDeleteModal} onHide={() => {
-                setShowDeleteModal(!showDeleteModal)
-            }}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Delete Confirm</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => {
-                        setShowDeleteModal(!showDeleteModal)
-                    }}>
-                        Close
-                    </Button>
-                    <Button variant="danger" onClick={() => {
-                        setShowDeleteModal(!showDeleteModal)
-                    }}>
-                        Delete
-                    </Button>
-                </Modal.Footer>
-            </Modal>
+            <DeleteConfirmModel message={`Do you want to delete bus ID -${deleteID}`}
+                                modelHandler={() => {
+                                    setShowDeleteModal(!showDeleteModal);
+                                }}
+                                submitHandler={() => {
+                                    console.log("Delete id -", deleteID);
+                                    DeleteBusByIDMutation.mutate(deleteID);
+                                    setShowDeleteModal(!showDeleteModal)
 
+                                }}
+                                showDeleteModel={showDeleteModal}/>
         </main>
     )
 }

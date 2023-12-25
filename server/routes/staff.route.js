@@ -5,7 +5,10 @@ let staffController = require("../controllers/staff.controller");
 
 router.get('/', staffController.getAllStaff);
 
+
 router.get('/:id', staffController.getStaffByID);
+router.delete("/:id",staffController.deleteStaffByID);
+
 
 // user register
 router.post("/", staffController.creatStaff);
@@ -14,7 +17,6 @@ router.post("/", staffController.creatStaff);
 router.post("/login",staffController.staffLogin);
 
 
-router.delete("/:id",staffController.deleteStaffByID);
 
 // router.post("/login",staffController.staffLogin);
 

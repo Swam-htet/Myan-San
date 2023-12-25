@@ -1,6 +1,6 @@
 'use client';
 import {Card, Col, Container, Row} from "react-bootstrap";
-import Image from "next/image";
+import Image from 'react-bootstrap/Image';
 
 
 export default function AboutPage() {
@@ -49,9 +49,6 @@ export default function AboutPage() {
                     <div>
                         Myan San offers a comprehensive range of travel services, including:
                         <ul>
-                            {/*<li>Flight Booking: Find the best deals on domestic and international flights.</li>*/}
-                            {/*<li>Hotel Reservations: Book comfortable accommodations tailored to your preferences.</li>*/}
-                            {/*<li>Car Rentals: Explore your destination with convenient car rental options.</li>*/}
                             <li>Travel Packages: Enjoy curated travel packages designed for various interests.</li>
                         </ul>
                     </div>
@@ -61,27 +58,27 @@ export default function AboutPage() {
                     <h2>Our Team</h2>
 
                     <Row>
-                        <Col md={4}>
+                        <Col md={4} className={'p-1'}>
                             <Card>
-                                <Image src={"/profiles/team_lead.png"} alt={"Team Lead"} width={600} height={400}/>
+                                <Image src="/profiles/owner_1.jpeg" fluid rounded/>
                                 <Card.Body>
                                     <Card.Title>John Doe</Card.Title>
                                     <Card.Text>Co-Founder & CEO</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col md={4}>
+                        <Col md={4} className={'p-1'}>
                             <Card>
-                                <Image src={"/profiles/team_lead.png"} alt={"Team Lead"} width={600} height={400}/>
+                                <Image src="/profiles/owner_2.jpeg" fluid rounded/>
                                 <Card.Body>
                                     <Card.Title>Jane Smith</Card.Title>
                                     <Card.Text>Co-Founder & COO</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
-                        <Col md={4}>
+                        <Col md={4} className={'p-1'}>
                             <Card>
-                                <Image src={"/profiles/team_lead.png"} alt={"Team Lead"} width={300} height={300}/>
+                                <Image src="/profiles/owner_3.jpeg" fluid rounded/>
                                 <Card.Body>
                                     <Card.Title>Mike Johnson</Card.Title>
                                     <Card.Text>Lead Developer</Card.Text>

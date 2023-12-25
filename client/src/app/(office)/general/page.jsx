@@ -2,12 +2,21 @@
 
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
-import axios from "axios";
 import {IoMdAdd} from "react-icons/io";
-import CompanyTable from "@/components/sharedComponents/CompanyTable";
-import TownTable from "@/components/sharedComponents/TownTable";
+import CompanyTable from "@/components/general/CompanyTable";
+import TownTable from "@/components/general/TownTable";
+import useGetAllTowns from "@/libs/hooks/useGetAllTowns";
+import useGetAllCompanies from "@/libs/hooks/useGetAllCompany";
+import Loading from "@/components/layouts/Loading";
+import Error from "@/components/layouts/Error";
+import DeleteConfirmModel from "@/components/shared/DeleteConfirmModel";
+import useDeleteCompanyByIDMutation from "@/libs/hooks/useDeleteCompanyByIDMutation";
+import useDeleteTownByIDMutation from "@/libs/hooks/useDeleteTownByIDMutation";
+import useCreateCompanyMutation from "@/libs/hooks/useCreateCopmanyMutation";
+import useCreateTownMutation from "@/libs/hooks/useCreateTownMutation";
 import Modal from "react-bootstrap/Modal";
-import {Button} from "react-bootstrap";
+import TownForm from "@/components/general/TownForm";
+import CompanyForm from "@/components/general/CompanyForm";
 
 export default function GeneralListPage() {
 
@@ -15,44 +24,76 @@ export default function GeneralListPage() {
     const [companyData, setCompanyData] = useState(null);
     const [townData, setTownData] = useState(null);
 
-    const [showAddModal, setShowAddModal] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showTownAddModal, setShowTownAddModal] = useState(false);
+    const [showTownDeleteModal, setShowTownDeleteModal] = useState(false);
+
+    const [showCompanyAddModal, setShowCompanyAddModal] = useState(false);
+    const [showCompanyDeleteModal, setShowCompanyDeleteModal] = useState(false);
+
+    const [townDeleteID, setTownDeleteID] = useState();
+    const [companyDeleteID, setCompanyDeleteID] = useState();
 
 
-    const [error, setError] = useState(null);
+    const GetAllTowns = useGetAllTowns();
+    const GetAllCompanies = useGetAllCompanies();
+
+    const DeleteCompanyByIDMutation = useDeleteCompanyByIDMutation();
+    const DeleteTownByIDMutation = useDeleteTownByIDMutation();
+
+    const CreateCompanyMutation = useCreateCompanyMutation();
+    const CreateTownMutation = useCreateTownMutation();
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:4000/api/companies');
-                setCompanyData(response.data);
-            } catch (error) {
-                setError(error);
-            }
-        };
-
-        fetchData();
-    }, []);
+        if (GetAllCompanies.isSuccess) {
+            setCompanyData(GetAllCompanies.data);
+        }
+    }, [GetAllCompanies.data]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:4000/api/towns');
-                setTownData(response.data);
-            } catch (error) {
-                setError(error);
-            }
-        };
+        if (GetAllTowns.isSuccess) {
+            setTownData(GetAllTowns.data);
+        }
+    }, [GetAllTowns.data]);
 
-        fetchData();
-    }, []);
-
-    const addModalHandler = () => {
-        setShowAddModal(!showAddModal);
+    if (GetAllTowns.isLoading || GetAllCompanies.isLoading) {
+        return <Loading/>
     }
 
-    const deleteModalHandler = (id) => {
-        console.log("Delete ID -", id);
-        setShowDeleteModal(!showDeleteModal);
+    if (GetAllTowns.isError) {
+        return <Error message={GetAllTowns.error.message}/>
+    }
+
+    if (GetAllCompanies.isError) {
+        return <Error message={GetAllCompanies.error.message}/>
+    }
+
+
+    const addTownModalHandler = () => {
+        setShowTownAddModal(!showTownAddModal);
+    }
+
+    const deleteTownModalHandler = (id) => {
+        setTownDeleteID(id);
+        setShowTownDeleteModal(!showTownDeleteModal);
+    }
+
+    const addCompanyModalHandler = () => {
+        setShowCompanyAddModal(!showCompanyAddModal);
+    }
+
+    const deleteCompanyModalHandler = (id) => {
+        setCompanyDeleteID(id);
+        setShowCompanyDeleteModal(!showCompanyDeleteModal);
+    }
+
+    const onSubmitForTownAddForm = (values) => {
+        CreateTownMutation.mutate(values)
+        setShowTownAddModal(!showTownAddModal)
+    }
+
+    const onSubmitForCompanyAddForm = (values) => {
+        CreateCompanyMutation.mutate(values);
+        setShowCompanyAddModal(!showCompanyAddModal);
     }
 
 
@@ -61,12 +102,12 @@ export default function GeneralListPage() {
             <div className={'mb-5'}>
                 <div className={'d-flex justify-content-between my-3'}>
                     <h3>Company Management</h3>
-                    <button className={'btn btn-primary'} onClick={addModalHandler}>
+                    <button className={'btn btn-primary'} onClick={addCompanyModalHandler}>
                         Add New Company <IoMdAdd/>
                     </button>
                 </div>
                 {
-                    companyData && <CompanyTable townList={companyData} deleteModalHandler={deleteModalHandler}/>
+                    companyData && <CompanyTable townList={companyData} deleteModalHandler={deleteCompanyModalHandler}/>
                 }
             </div>
 
@@ -74,53 +115,59 @@ export default function GeneralListPage() {
             <div className={'mb-5'}>
                 <div className={'d-flex justify-content-between my-3'}>
                     <h3>Town Management</h3>
-                    <button className={'btn btn-primary'} onClick={addModalHandler}>
+                    <button className={'btn btn-primary'} onClick={addTownModalHandler}>
                         Add New Town <IoMdAdd/>
                     </button>
                 </div>
                 {
-                    townData && <TownTable townList={townData} deleteModalHandler={deleteModalHandler}/>
+                    townData && <TownTable townList={townData} deleteModalHandler={deleteTownModalHandler}/>
                 }
             </div>
 
-            {/*     add new modal box     */}
-            <Modal show={showAddModal} onHide={addModalHandler}>
+
+            <Modal show={showCompanyAddModal} onHide={addCompanyModalHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Company Form</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={addModalHandler}>
-                        Close
-                    </Button>
-                    <Button variant="primary" onClick={addModalHandler}>
-                        Save Changes
-                    </Button>
-                </Modal.Footer>
+                <Modal.Body>
+                    <CompanyForm onSubmit={onSubmitForCompanyAddForm} modelHandler={addCompanyModalHandler}/>
+
+                </Modal.Body>
+
             </Modal>
 
-
-            {/*     delete confirm modal box     */}
-            <Modal show={showDeleteModal} onHide={() => {
-                setShowDeleteModal(!showDeleteModal)
-            }}>
+            <Modal show={showTownAddModal} onHide={addTownModalHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete Confirm</Modal.Title>
+                    <Modal.Title>Town Form</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={() => {
-                        setShowDeleteModal(!showDeleteModal)
-                    }}>
-                        Close
-                    </Button>
-                    <Button variant="danger" onClick={() => {
-                        setShowDeleteModal(!showDeleteModal)
-                    }}>
-                        Delete
-                    </Button>
-                </Modal.Footer>
+                <Modal.Body>
+                    <TownForm onSubmit={onSubmitForTownAddForm} modelHandler={addTownModalHandler}/>
+                </Modal.Body>
+
             </Modal>
+
+            <DeleteConfirmModel message={`Do you want to delete company ID -${companyDeleteID}`}
+                                modelHandler={() => {
+                                    setShowCompanyDeleteModal(!showCompanyDeleteModal);
+                                }}
+                                submitHandler={() => {
+                                    console.log("Delete id -", companyDeleteID);
+                                    DeleteCompanyByIDMutation.mutate(companyDeleteID);
+                                    setShowCompanyDeleteModal(!showCompanyDeleteModal)
+                                }}
+                                showDeleteModel={showCompanyDeleteModal}/>
+
+            <DeleteConfirmModel message={`Do you want to delete town ID -${townDeleteID}`}
+                                modelHandler={() => {
+                                    setShowTownDeleteModal(!showTownDeleteModal);
+                                }}
+                                submitHandler={() => {
+                                    DeleteTownByIDMutation.mutate(townDeleteID);
+                                    setShowTownDeleteModal(!showTownDeleteModal);
+
+                                }}
+                                showDeleteModel={showTownDeleteModal}/>
+            
 
         </main>
     )

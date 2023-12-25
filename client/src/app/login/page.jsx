@@ -1,19 +1,35 @@
 'use client';
 
-import LoginForm from "@/components/sharedComponents/LoginForm";
+import LoginForm from "@/components/login/LoginForm";
+import useStaffLogin from "@/libs/hooks/useStaffLogin";
+import {useEffect} from "react";
+import {getCookie, setCookie} from "cookies-next";
+import {useRouter} from "next/navigation";
 
 
 export default function LoginPage() {
+    let router = useRouter();
 
-    const handleSubmit = (values) => {
-        console.log('Login submitted:', values);
+    let StaffLoginMutation = useStaffLogin();
+
+    const handleSubmit = (body) => {
+        console.log('Login submitted:', body);
+        StaffLoginMutation.mutate(body);
     };
+
+    useEffect(() => {
+        if (StaffLoginMutation.isSuccess) {
+            console.log("Staff Login Success");
+            setCookie('auth-token', StaffLoginMutation.data.token);
+            router.push("/staff")
+        }
+    }, [StaffLoginMutation.data, StaffLoginMutation.isSuccess]);
 
     return (
         <main className={'container py-4'}>
             <h1 className={'text-center'}>Staff Login</h1>
             <div style={{maxWidth:"600px",margin:"0 auto"}}>
-                <LoginForm onSubmit={handleSubmit}/>
+                <LoginForm handleSubmit={handleSubmit}/>
             </div>
 
         </main>

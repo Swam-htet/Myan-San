@@ -1,6 +1,7 @@
 'use client';
 
 import {usePathname, useRouter} from "next/navigation";
+import dayjs from "dayjs";
 
 export default function RouteCard({data}) {
     let router = useRouter();
@@ -21,7 +22,7 @@ export default function RouteCard({data}) {
                     </li>
 
                     <li className="card-text">
-                        Deparature Date - {Date(data.scheduleDate).toLocaleLowerCase()}
+                        Deparature Date - {dayjs(data.scheduleDate).format("DD/MM/YYYY - HH:mm")}
                     </li>
                 </ul>
 

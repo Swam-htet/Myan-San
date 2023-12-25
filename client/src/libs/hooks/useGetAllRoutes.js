@@ -3,7 +3,7 @@ import {endpoints} from "@/libs/endpoints";
 import {useQuery} from "@tanstack/react-query";
 
 const fetchAllRoutes = async () => {
-    let {data} = await axios.get(endpoints.routes.allRoutes);
+    let {data} = await axios.get(endpoints.routes.default);
     return data;
 }
 
