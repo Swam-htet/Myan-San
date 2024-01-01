@@ -20,6 +20,10 @@ let companyRouter = require("./routes/company.route");
 let townRouter = require("./routes/town.route");
 let travelRouter = require("./routes/route.route");
 let ticketRouter = require("./routes/ticket.route");
+let faqRouter = require("./routes/faq.route");
+let feedbackRouter = require("./routes/feedback.route");
+
+
 const {checkRole, verifyUserToken} = require("./middleware");
 
 
@@ -69,15 +73,15 @@ app.use("/api/staff", staffRouter);
 // app.use(verifyUserToken, checkRole("admin"));
 
 
-
-
-
 // authenticated routes
 app.use("/api/buses", busRouter);
 app.use("/api/companies", companyRouter);
 app.use("/api/towns", townRouter);
 app.use("/api/routes", travelRouter);
 app.use("/api/tickets", ticketRouter);
+app.use("/api/faqs", faqRouter);
+app.use("/api/feedbacks", feedbackRouter);
+
 
 
 

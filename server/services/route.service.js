@@ -1,15 +1,30 @@
 let Route = require("../models/route.model");
-const {faker} = require("@faker-js/faker");
+const mongoose = require('mongoose');
+
+
+function removeEmptyKeys(obj, lengthThreshold = 1, keysToRemove = []) {
+    const result = {...obj}; // Create a shallow copy of the object
+
+    // Add specific keys to remove from the object
+    const keysToRemoveSet = new Set(keysToRemove);
+
+    for (const key in result) {
+        if (result.hasOwnProperty(key) && (result[key] === "" || String(result[key]).length <= lengthThreshold || keysToRemoveSet.has(key))) {
+            delete result[key];
+        }
+    }
+
+    return result;
+};
 
 async function getAllRoute(params) {
-    const filteredParams = Object.fromEntries(
-        Object.entries(params).filter(([key, value]) => value !== '')
-    );
+    // let page = params.page;
+    // let size = params.size;
 
+    const modifiedParams = removeEmptyKeys(params, 1, ['page', 'size','ticketType','noOfPassenger','date']);
 
     // Execute the query with population
-    const routes = await Route.find()
-        .populate('fromTown')
+    const routes = await Route.find(modifiedParams).populate('fromTown')
         .populate('toTown')
         .populate({
             path: 'bus',
@@ -17,9 +32,17 @@ async function getAllRoute(params) {
                 path: 'company',
                 model: 'Company',
             },
-        });
+        })
+        // .skip((page - 1) * size).limit(size);
 
-    return routes;
+    return {
+        payload: routes,
+        pagination: {
+            total_records: routes.length,
+            // page: page,
+            // size: size,
+        }
+    }
 
 
 }

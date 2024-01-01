@@ -53,6 +53,12 @@ db.once('open', async () => {
     const Ticket = require('../models/ticket.model.js');
     await clearModelData(Ticket);
 
+    const Feedback = require('../models/feedback.model.js');
+    await clearModelData(Feedback);
+
+    const Faq = require('../models/faq.model.js');
+    await clearModelData(Faq);
+
 
     // staff fake data insert
     for (let i = 0; i < 20; i++) {

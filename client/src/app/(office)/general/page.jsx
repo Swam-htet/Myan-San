@@ -17,6 +17,7 @@ import useCreateTownMutation from "@/libs/hooks/useCreateTownMutation";
 import Modal from "react-bootstrap/Modal";
 import TownForm from "@/components/general/TownForm";
 import CompanyForm from "@/components/general/CompanyForm";
+import toast from "react-hot-toast";
 
 export default function GeneralListPage() {
 
@@ -54,6 +55,24 @@ export default function GeneralListPage() {
             setTownData(GetAllTowns.data);
         }
     }, [GetAllTowns.data]);
+
+    useEffect(() => {
+        if (DeleteCompanyByIDMutation.isSuccess) {
+            toast.success("Company deleted successfully")
+        }
+        if (DeleteCompanyByIDMutation.isError) {
+            toast.error("Can't delete company right now, please try again later");
+        }
+    }, [DeleteCompanyByIDMutation.isError, DeleteTownByIDMutation.isSuccess, DeleteCompanyByIDMutation.data]);
+
+    useEffect(() => {
+        if (DeleteTownByIDMutation.isSuccess) {
+            toast.success("Town deleted successfully")
+        }
+        if (DeleteTownByIDMutation.isError) {
+            toast.error("Can't delete town right now, please try again later");
+        }
+    }, [DeleteTownByIDMutation.isError, DeleteTownByIDMutation.isSuccess, DeleteTownByIDMutation.data]);
 
     if (GetAllTowns.isLoading || GetAllCompanies.isLoading) {
         return <Loading/>
@@ -111,7 +130,6 @@ export default function GeneralListPage() {
                 }
             </div>
 
-
             <div className={'mb-5'}>
                 <div className={'d-flex justify-content-between my-3'}>
                     <h3>Town Management</h3>
@@ -123,17 +141,6 @@ export default function GeneralListPage() {
                     townData && <TownTable townList={townData} deleteModalHandler={deleteTownModalHandler}/>
                 }
             </div>
-
-            <div className={'mb-5'}>
-                <div className={'d-flex justify-content-between my-3'}>
-                    <h3>Faq Management</h3>
-                    
-                </div>
-                <div>
-                    
-                </div>
-            </div>
-
 
             <Modal show={showCompanyAddModal} onHide={addCompanyModalHandler}>
                 <Modal.Header closeButton>

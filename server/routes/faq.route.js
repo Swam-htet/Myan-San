@@ -1,0 +1,11 @@
+let express = require("express");
+let router = express.Router();
+
+let faqController = require("../controllers/faq.controller");
+
+router.get("/", faqController.getAllFaq);
+
+router.post("/", faqController.createFaq);
+
+
+module.exports = router;

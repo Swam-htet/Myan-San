@@ -44,8 +44,25 @@ async function createTicket(req, res, next) {
 }
 
 
+async function deleteTicketByID(req, res, next) {
+    let id = req.params.id;
+
+    try {
+        let ticket = await ticketService.deleteTicketByID(id);
+        if (ticket) {
+            res.status(200).json(ticket);
+        } else {
+            res.status(400).json({message: "Ticket not found"});
+        }
+    } catch (error) {
+        res.status(400).json({message: `Ticket not found`});
+    }
+
+}
+
 module.exports = {
     getAllTicket,
     getTicketByID,
     createTicket,
+    deleteTicketByID
 }

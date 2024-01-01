@@ -17,11 +17,11 @@ export default function RouteListPage() {
     let path = usePathname();
 
     const [deleteID, setDeleteID] = useState();
-    const [data, setData] = useState(null);
+    const [data, setData] = useState([]);
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-    const GetAllRoutes = useGetAllRoutes();
+    const GetAllRoutes = useGetAllRoutes({});
     const DeleteRouteByIDMutation = useDeleteRouteByIDMutation();
 
     const deleteModalHandler = (id) => {
@@ -31,7 +31,7 @@ export default function RouteListPage() {
     }
 
     useEffect(() => {
-        setData(GetAllRoutes.data);
+        setData(GetAllRoutes.data && GetAllRoutes.data.payload);
     }, [GetAllRoutes.data, GetAllRoutes.isSuccess]);
 
     useEffect(() => {

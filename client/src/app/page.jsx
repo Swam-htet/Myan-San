@@ -1,23 +1,46 @@
 'use client';
 
 import {Carousel} from "react-bootstrap";
-import TicketSearchForm from "@/components/home/TicketSearchForm";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
+import useGetAllTowns from "@/libs/hooks/useGetAllTowns";
+import {useEffect, useState} from "react";
+import RouteSearchForm from "@/components/home/RouteSearchForm";
 
+function removeEmptyValues(obj) {
+    const result = {};
+
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key) && obj[key] !== '') {
+            result[key] = obj[key];
+        }
+    }
+
+    return result;
+}
 
 export default function HomePage() {
     let router = useRouter();
+    let [data, setData] = useState(null);
 
+    let GetAllTowns = useGetAllTowns();
     const onSearchRouteHandler = (values) => {
-        router.push(`/travel-routes?fromTown=${values.fromTown}&toTown=${values.toTown}&type=${values.ticketType}&passengerCount=${values.passengerCount}&departureDate=${values.departureDate}`);
+        let queryString = Object.entries(removeEmptyValues(values)).map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+            .join('&');
+        console.log("Query String - ", queryString);
+
+        router.push(`/travel-routes?${queryString}`);
     }
+
+    useEffect(() => {
+        setData(GetAllTowns.data);
+    }, [GetAllTowns.isError, GetAllTowns.isSuccess, GetAllTowns.isSuccess]);
     return (
         <main className={'container'}>
             <div className={'container-lg my-3 bg-light p-5 rounded'}>
                 <h4 className={'text-center text-primary'}>Search Trip</h4>
                 <div style={{width: "700px", margin: "0 auto"}}>
-                    <TicketSearchForm onSubmit={onSearchRouteHandler}/>
+                    <RouteSearchForm towns={data || []} onSubmit={onSearchRouteHandler}/>
                 </div>
             </div>
 

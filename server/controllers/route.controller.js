@@ -1,7 +1,29 @@
 const routeService = require("../services/route.service");
 
+
+// "pagination"
+// :
+// {
+//     "total_records"
+// :
+//     100,
+//         "current_page"
+// :
+//     1,
+//         "total_pages"
+// :
+//     10,
+//         "next_page"
+// :
+//     2,
+//         "prev_page"
+// :
+//     null
+// }
+
 async function getAllRoute(req, res, next) {
-    const queryParams = req.query;
+    let queryParams = req.query;
+    console.log("Query -", queryParams);
     try {
         let routes = await routeService.getAllRoute(queryParams);
         if (routes) {
@@ -10,9 +32,8 @@ async function getAllRoute(req, res, next) {
             res.status(200).json([]);
         }
     } catch (error) {
-        res.status(200).json([]);
+        res.status(200).json({message: error.message});
     }
-
 }
 
 async function getRouteByID(req, res, next) {

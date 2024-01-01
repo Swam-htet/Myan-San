@@ -17,8 +17,10 @@ const navList = [{
 }, {
     title: 'General Management', link: '/general'
 }, {
+    title: 'Feedback Management', link: '/feedbacks'
+}, {
     title: 'Settings', link: '/settings'
-}]
+},]
 
 export default function DashboardLayout({children}) {
 
