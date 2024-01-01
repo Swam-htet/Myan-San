@@ -2,16 +2,19 @@
 
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
-import StaffTable from "@/components/staff/StaffTable";
-import Modal from "react-bootstrap/Modal";
-import {IoMdAdd} from "react-icons/io";
-import Loading from "@/components/layouts/Loading";
-import Error from "@/components/layouts/Error";
 import useGetAllStaff from "@/libs/hooks/useGetAllStaff";
 import useDeleteStaffByIDMutation from "@/libs/hooks/useDeleteStaffByIDMutation";
-import DeleteConfirmModel from "@/components/shared/DeleteConfirmModel";
-import StaffForm from "@/components/staff/StaffForm";
+import toast from "react-hot-toast";
+
 import useCreateStaffMutation from "@/libs/hooks/useCreateStaffMutation";
+import DeleteConfirmModel from "@/components/shared/DeleteConfirmModel";
+import Modal from "react-bootstrap/Modal";
+import StaffTable from "@/components/staff/StaffTable";
+import {IoMdAdd} from "react-icons/io";
+import StaffForm from "@/components/staff/StaffForm";
+import Loading from "@/components/layouts/Loading";
+import Error from "@/components/layouts/Error";
+
 
 export default function StaffListPage() {
     let router = useRouter();
@@ -23,7 +26,6 @@ export default function StaffListPage() {
     let GetAllStaff = useGetAllStaff();
     let DeleteStaffByIDMutation = useDeleteStaffByIDMutation();
     let CreateStaffMutation = useCreateStaffMutation();
-
 
 
     const addModalHandler = () => {
@@ -46,6 +48,25 @@ export default function StaffListPage() {
             setData(GetAllStaff.data);
         }
     }, [GetAllStaff.data]);
+
+
+    useEffect(() => {
+        if (DeleteStaffByIDMutation.isSuccess) {
+            toast.success("Staff deleted successfully")
+        }
+        if (DeleteStaffByIDMutation.isError) {
+            toast.error("Staff cannot be deleted right now, please try again later ")
+        }
+    }, [DeleteStaffByIDMutation.data, DeleteStaffByIDMutation.isSuccess, DeleteStaffByIDMutation.isError]);
+
+    useEffect(() => {
+        if (CreateStaffMutation.isSuccess) {
+            toast.success("Staff created successfully")
+        }
+        if (CreateStaffMutation.isError) {
+            toast.error("Staff cannot be created right now, please try again later ")
+        }
+    }, [CreateStaffMutation.data, CreateStaffMutation.isSuccess, CreateStaffMutation.isError]);
 
     if (GetAllStaff.isLoading) {
         return <Loading/>
@@ -79,7 +100,7 @@ export default function StaffListPage() {
         </Modal>
 
 
-        <DeleteConfirmModel message={`Do you want to delete staff ID -${deleteID}`}
+        <DeleteConfirmModel message={`Doyouwanttodelete staffID -${deleteID}`}
                             modelHandler={() => {
                                 setShowDeleteModal(!showDeleteModal);
                             }}

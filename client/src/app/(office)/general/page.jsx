@@ -124,6 +124,16 @@ export default function GeneralListPage() {
                 }
             </div>
 
+            <div className={'mb-5'}>
+                <div className={'d-flex justify-content-between my-3'}>
+                    <h3>Faq Management</h3>
+                    
+                </div>
+                <div>
+                    
+                </div>
+            </div>
+
 
             <Modal show={showCompanyAddModal} onHide={addCompanyModalHandler}>
                 <Modal.Header closeButton>
@@ -167,7 +177,7 @@ export default function GeneralListPage() {
 
                                 }}
                                 showDeleteModel={showTownDeleteModal}/>
-            
+
 
         </main>
     )

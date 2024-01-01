@@ -10,6 +10,8 @@ import {IoIosBookmark} from "react-icons/io";
 import Loading from "@/components/layouts/Loading";
 import Error from "@/components/layouts/Error";
 import TicketBookingForm from "@/components/travel-route/TicketBookingForm";
+import toast from "react-hot-toast";
+import useCreateTicketOrderMutation from "@/libs/hooks/useCreateTicketOrderMutation";
 
 
 export default function TravelRoutesPage({params}) {
@@ -55,7 +57,21 @@ export default function TravelRoutesPage({params}) {
     const modelHandler = () => {
         setBookModel(!bookModel);
     }
+    let CreateTicketOrderMutation = useCreateTicketOrderMutation();
 
+    let submitHandler = (values) => {
+         CreateTicketOrderMutation.mutate(values);
+    }
+
+
+    useEffect(() => {
+        if(CreateTicketOrderMutation.isSuccess){
+            toast.success("Ticket Booking is successfully")
+        }
+        if(CreateTicketOrderMutation.isError){
+            toast.error("Ticket Booking is failed, please try again later");
+        }
+    }, [CreateTicketOrderMutation.data, CreateTicketOrderMutation.isSuccess,CreateTicketOrderMutation.isError]);
 
     if (GetRouteByID.isError) {
         return <Error message={GetRouteByID.error.message}/>
@@ -140,6 +156,7 @@ export default function TravelRoutesPage({params}) {
 
                             <Modal.Body>
                                 <TicketBookingForm initialValues={initialValues}
+                                                   submitHandler={submitHandler}
                                                    resetBooking={() => {
                                                        setBookModel(!bookModel);
                                                        setSeatList([]);

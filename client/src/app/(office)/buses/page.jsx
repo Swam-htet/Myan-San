@@ -13,6 +13,7 @@ import useDeleteBusByIDMutation from "@/libs/hooks/useDeleteBusByIDMutation";
 import BusForm from "@/components/bus/BusForm";
 import useCreateBusMutation from "@/libs/hooks/useCreateBusMutation";
 import useGetAllCompanies from "@/libs/hooks/useGetAllCompany";
+import toast from "react-hot-toast";
 
 export default function BusListPage() {
     let router = useRouter();
@@ -56,6 +57,15 @@ export default function BusListPage() {
         }
     }, [GetAllCompanies.data]);
 
+    useEffect(() => {
+
+        if (DeleteBusByIDMutation.isSuccess) {
+            toast.success("Bus deleted successfully");
+        }
+        if (DeleteBusByIDMutation.isError) {
+            toast.error("Can't delete bus right now, please try again later");
+        }
+    }, [DeleteBusByIDMutation.data, DeleteBusByIDMutation.isError, DeleteBusByIDMutation.isSuccess]);
 
     if (GetAllBuses.isLoading || GetAllCompanies.isLoading) {
         return <Loading/>

@@ -60,7 +60,7 @@ export default function AboutPage() {
                     <Row>
                         <Col md={4} className={'p-1'}>
                             <Card>
-                                <Image src="/profiles/owner_1.jpeg" fluid rounded/>
+                                <Image src="/profiles/owner_1.jpeg" fluid rounded className={'m-2'}/>
                                 <Card.Body>
                                     <Card.Title>John Doe</Card.Title>
                                     <Card.Text>Co-Founder & CEO</Card.Text>
@@ -69,7 +69,7 @@ export default function AboutPage() {
                         </Col>
                         <Col md={4} className={'p-1'}>
                             <Card>
-                                <Image src="/profiles/owner_2.jpeg" fluid rounded/>
+                                <Image src="/profiles/owner_2.jpeg" fluid rounded className={'m-2'}/>
                                 <Card.Body>
                                     <Card.Title>Jane Smith</Card.Title>
                                     <Card.Text>Co-Founder & COO</Card.Text>
@@ -78,7 +78,7 @@ export default function AboutPage() {
                         </Col>
                         <Col md={4} className={'p-1'}>
                             <Card>
-                                <Image src="/profiles/owner_3.jpeg" fluid rounded/>
+                                <Image src="/profiles/owner_3.jpeg" fluid rounded className={'m-2'}/>
                                 <Card.Body>
                                     <Card.Title>Mike Johnson</Card.Title>
                                     <Card.Text>Lead Developer</Card.Text>

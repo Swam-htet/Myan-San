@@ -1,12 +1,20 @@
 'use client';
 
-import {Button, Container, Form as BootstrapForm} from 'react-bootstrap';
+import {Accordion, Button, Container, Form as BootstrapForm} from 'react-bootstrap';
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
-import React from "react";
+import React, {useEffect, useState} from "react";
+import useGetAllFaqs from "@/libs/hooks/useGellAllFaqs";
+import Loading from "@/components/layouts/Loading";
+import Error from "@/components/layouts/Error";
+import useCreateFeedbackMutation from "@/libs/hooks/useCreateFeedbackMutation";
+import toast from "react-hot-toast";
 
 
 export default function ContactPage() {
+    const [data, setData] = useState(null);
+
+    const GetAllFaqs = useGetAllFaqs();
 
     const validationSchema = Yup.object({
         yourName: Yup.string().required('Your Name is required'),
@@ -20,12 +28,47 @@ export default function ContactPage() {
         message: '',
     };
 
+    const CreateFeedbackMutation = useCreateFeedbackMutation();
+
 
     const handleFormSubmit = (values, actions) => {
-        // Handle form submission here
-        console.log(values);
+        const payload = {
+            customer: {
+                name: values.yourName,
+                email: values.email
+            },
+            feedback: values.message
+        }
+        CreateFeedbackMutation.mutate(payload)
+        actions.resetForm();
         actions.setSubmitting(false); // Reset submitting state
     };
+
+    useEffect(() => {
+
+        if (CreateFeedbackMutation.isSuccess) {
+            toast.success("Feedback created successfully")
+        } else if (CreateFeedbackMutation.isError) {
+            toast.error("Can't give feedback right now, please try again later");
+        }
+    }, [CreateFeedbackMutation.data, CreateFeedbackMutation.isSuccess, CreateFeedbackMutation.isError]);
+
+    useEffect(() => {
+        if (GetAllFaqs.isSuccess) {
+            setData(GetAllFaqs.data);
+        }
+    }, [GetAllFaqs.data]);
+
+    if (GetAllFaqs.isLoading) {
+        return <Loading/>
+    }
+
+    if (GetAllFaqs.isError) {
+        return <Error message={GetAllFaqs.error.message}/>
+    }
+
+
+
     return (
         <main className={'container-fluid'}>
             <Container className="mt-5">
@@ -100,6 +143,25 @@ export default function ContactPage() {
                 </div>
 
             </Container>
+
+            <div className={'container mt-4'}>
+                <h2 className={'my-3'}>Frequently Ask Question</h2>
+                <Accordion>
+                    {
+                        data && data.map((faq, index) => {
+                            return (<Accordion.Item eventKey={index} key={index}>
+                                <Accordion.Header>{faq.question}</Accordion.Header>
+                                <Accordion.Body>
+                                    {
+                                        faq.answer
+                                    }
+                                </Accordion.Body>
+                            </Accordion.Item>)
+                        })
+                    }
+
+                </Accordion>
+            </div>
         </main>
     )
 }

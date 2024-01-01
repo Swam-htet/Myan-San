@@ -19,5 +19,11 @@ export let endpoints = {
     },
     towns: {
         default: apiURL + "/towns"
+    },
+    faqs: {
+        default: apiURL + "/faqs"
+    },
+    feedbacks: {
+        default: apiURL + "/feedbacks"
     }
 }

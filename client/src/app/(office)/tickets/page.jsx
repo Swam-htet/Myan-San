@@ -8,6 +8,7 @@ import Loading from "@/components/layouts/Loading";
 import Error from "@/components/layouts/Error";
 import useGetAllTicket from "@/libs/hooks/useGetAllTicket";
 import useDeleteTicketByIDMutation from "@/libs/hooks/useDeleteTicketByIDMutation";
+import toast from "react-hot-toast";
 
 export default function BusListPage() {
     let router = useRouter();
@@ -33,6 +34,16 @@ export default function BusListPage() {
         }
     }, [GetAllTicket.data]);
 
+    useEffect(() => {
+        if (DeleteTicketByIDMutation.isSuccess) {
+            toast.success("Ticket deleted successfully");
+        }
+        if (DeleteTicketByIDMutation.isError) {
+            toast.error("Can't delete ticket right now, please try again later");
+        }
+    }, [DeleteTicketByIDMutation.data, DeleteTicketByIDMutation.isError, DeleteTicketByIDMutation.isSuccess]);
+
+
     if (GetAllTicket.isLoading) {
         return <Loading/>
     }
@@ -48,9 +59,11 @@ export default function BusListPage() {
             <div className={'d-flex justify-content-between align-items-center my-3'}>
                 <h1>Ticket Management</h1>
             </div>
-            {
-                data && <TicketTable ticketList={data} deleteModalHandler={deleteModalHandler}/>
-            }
+            <div className={'w-100 overflow-x-scroll'}>
+                {
+                    data && <TicketTable ticketList={data} deleteModalHandler={deleteModalHandler}/>
+                }
+            </div>
 
 
             <DeleteConfirmModel message={`Do you want to delete ticket ID -${deleteID}`}
@@ -58,10 +71,8 @@ export default function BusListPage() {
                                     setShowDeleteModal(!showDeleteModal);
                                 }}
                                 submitHandler={() => {
-                                    console.log("Delete id -", deleteID);
-                                    // DeleteTicketByIDMutation.mutate(deleteID);
-                                    setShowDeleteModal(!showDeleteModal)
-
+                                    setShowDeleteModal(!showDeleteModal);
+                                    DeleteTicketByIDMutation.mutate(deleteID);
                                 }}
                                 showDeleteModel={showDeleteModal}/>
         </main>

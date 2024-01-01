@@ -1,21 +1,23 @@
 'use client';
 
-import {Container, Nav, Navbar} from "react-bootstrap";
+import {Button, Container, Nav, Navbar} from "react-bootstrap";
 import {useRouter} from "next/navigation";
 import {deleteCookie, hasCookie} from "cookies-next";
 import {useEffect, useState} from "react";
 
 export default function NavbarLayout() {
     let router = useRouter();
-    const [isClient, setIsClient] = useState(false)
+    let [loginState, setLoginState] = useState(false);
 
     useEffect(() => {
-        setIsClient(true)
-    }, [])
+        if (hasCookie("auth-token")) {
+            setLoginState("admin");
+        } else {
+            setLoginState("client")
+        }
+    }, []);
 
-    return <>
-        {
-            isClient && <Navbar expand="lg" className="bg-body-tertiary">
+    return <Navbar expand="lg" className="bg-body-tertiary">
                 <Container>
                     <Navbar.Brand href="#home" onClick={(e) => {
                         e.preventDefault();
@@ -49,7 +51,8 @@ export default function NavbarLayout() {
                             </Nav.Link>
 
 
-                            {!hasCookie("auth-token") ? <>
+
+                            {loginState === "client" ? <>
                                 <Nav.Link className={'mt-1'} onClick={(e) => {
                                     e.preventDefault();
                                     router.push("/login");
@@ -77,7 +80,5 @@ export default function NavbarLayout() {
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
-            </Navbar>
-        }
-    </>
+    </Navbar>;
 }

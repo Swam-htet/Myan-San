@@ -1,14 +1,34 @@
 'use client';
 import {useRouter} from "next/navigation";
-
-import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Tab from 'react-bootstrap/Tab';
 import {useEffect, useState} from "react";
 import {getCookie} from "cookies-next";
+import {Button} from "react-bootstrap";
+
+const navList = [{
+    title: 'Staff Management', link: '/staff'
+}, {
+    title: 'Bus Management', link: '/buses'
+}, {
+    title: 'Ticket Management', link: '/tickets'
+}, {
+    title: 'Route Management', link: '/routes'
+}, {
+    title: 'General Management', link: '/general'
+}, {
+    title: 'Settings', link: '/settings'
+}]
 
 export default function DashboardLayout({children}) {
+
     let router = useRouter();
+
+    let [active, setActive] = useState(0);
+
+    const onActiveChangeHandler = (index) => {
+        setActive(index);
+    }
 
     let [permossion, setPermission] = useState(false);
 
@@ -23,52 +43,35 @@ export default function DashboardLayout({children}) {
 
     }, []);
 
-    return (
-        <>
+    return (<>
             {permossion && <Tab.Container>
                 <div className={'row w-100'}>
-                    <Col sm={2}>
-                        <Nav className="flex-column">
-                            <Nav.Item>
-                                <Nav.Link onClick={(e) => {
-                                    e.preventDefault();
-                                    router.push("/staff")
-                                }}>Staff Management</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link onClick={(e) => {
-                                    e.preventDefault();
-                                    router.push("/buses")
-                                }}>Bus Management</Nav.Link>
-                            </Nav.Item>
+                    <div className={'col-3'}>
+                        <Nav className="flex-column px-3 mt-5">
 
-                            <Nav.Item>
-                                <Nav.Link onClick={(e) => {
-                                    e.preventDefault();
-                                    router.push("/routes")
-                                }}>Travel Route Management</Nav.Link>
-                            </Nav.Item>
-                            <Nav.Item>
-                                <Nav.Link onClick={(e) => {
-                                    e.preventDefault();
-                                    router.push("/tickets")
-                                }}>Ticket Management</Nav.Link>
-                            </Nav.Item>
+                            {
+                                navList.map((item, index) => {
+                                    return <Button variant={index === active ? "primary" : "light"}
+                                                   key={index}
+                                                   className={`mb-2`}
+                                                   onClick={(e) => {
+                                                       router.push(item.link)
+                                                       onActiveChangeHandler(index);
+                                                   }}>{
+                                        item.title
+                                    }</Button>
+                                })
+                            }
+                            
 
-                            <Nav.Item>
-                                <Nav.Link onClick={(e) => {
-                                    e.preventDefault();
-                                    router.push("/general")
-                                }}>General Management</Nav.Link>
-                            </Nav.Item>
                         </Nav>
-                    </Col>
+                    </div>
 
-                    <Col sm={10}>
+                    <div className={"col-9"}>
                         <Tab.Content className={'min-vh-100'}>
                             {children}
                         </Tab.Content>
-                    </Col>
+                    </div>
                 </div>
             </Tab.Container>}
 

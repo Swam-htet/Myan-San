@@ -5,6 +5,7 @@ import useStaffLogin from "@/libs/hooks/useStaffLogin";
 import {useEffect} from "react";
 import {getCookie, setCookie} from "cookies-next";
 import {useRouter} from "next/navigation";
+import toast from "react-hot-toast";
 
 
 export default function LoginPage() {
@@ -13,17 +14,21 @@ export default function LoginPage() {
     let StaffLoginMutation = useStaffLogin();
 
     const handleSubmit = (body) => {
-        console.log('Login submitted:', body);
         StaffLoginMutation.mutate(body);
     };
 
+
     useEffect(() => {
-        if (StaffLoginMutation.isSuccess) {
-            console.log("Staff Login Success");
+        if (StaffLoginMutation.isSuccess && StaffLoginMutation.data) {
+            toast.success("Staff Login Success");
             setCookie('auth-token', StaffLoginMutation.data.token);
-            router.push("/staff")
+            router.push("/staff");
         }
-    }, [StaffLoginMutation.data, StaffLoginMutation.isSuccess]);
+        if(StaffLoginMutation.isError){
+            toast.error("Staff Login Failure, please try again");
+
+        }
+    }, [StaffLoginMutation.data, StaffLoginMutation.isSuccess,StaffLoginMutation.isError]);
 
     return (
         <main className={'container py-4'}>

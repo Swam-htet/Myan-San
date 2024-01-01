@@ -2,8 +2,6 @@ import React from 'react';
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import {Button, Form as BootstrapForm} from 'react-bootstrap';
-import axios from "axios";
-import {setCookie} from "cookies-next";
 
 const LoginForm = ({handleSubmit}) => {
     const initialValues = {
@@ -20,7 +18,13 @@ const LoginForm = ({handleSubmit}) => {
 
 
     return (
-        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+        <Formik initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={(values,actions) => {
+                    handleSubmit(values);
+                    actions.resetForm();
+
+                }}>
             <Form>
                 <BootstrapForm.Group className="mb-3" controlId="formUserName">
                     <BootstrapForm.Label>Username</BootstrapForm.Label>

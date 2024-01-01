@@ -42,7 +42,8 @@ const StaffForm = ({data: initialValue, onSubmit, modelHandler}) => {
 
     return (
         <Container>
-            <Formik initialValues={initialFormValue} validationSchema={validationSchema}
+            <Formik initialValues={initialFormValue}
+                    validationSchema={validationSchema}
                     onSubmit={onSubmit}>
                 <Form>
                     {/* First Name */}

@@ -5,11 +5,12 @@ import {Button, FormGroup, FormLabel} from "react-bootstrap";
 import * as Yup from "yup";
 import useCreateTicketOrderMutation from "@/libs/hooks/useCreateTicketOrderMutation";
 import {useParams} from "next/navigation";
+import {useEffect} from "react";
+import toast from "react-hot-toast";
 
-export default function TicketBookingForm({initialValues, routeData, selectSeats, resetBooking, modelHandler}) {
+export default function TicketBookingForm({submitHandler,initialValues, routeData, selectSeats, resetBooking, modelHandler}) {
     let params = useParams();
 
-    let CreateTicketOrderMutation = useCreateTicketOrderMutation();
 
     const ticketOrderBtnSubmitHandler = (values) => {
         console.log("Values -", values);
@@ -28,13 +29,15 @@ export default function TicketBookingForm({initialValues, routeData, selectSeats
                 _id: seat._id
             }))]
         }
-        console.log("Body -", body);
-        CreateTicketOrderMutation.mutate(body);
+        submitHandler(body);
+        
         resetBooking();
     }
 
+
+
     const validationSchema = Yup.object().shape({
-        firstName: Yup.string().required('Firstname is equired'),
+        firstName: Yup.string().required('Firstname is required'),
         lastName: Yup.string().required('Lastname is required'),
         email: Yup.string().email('Invalid email address').required('Email address is required'),
         phoneNumber: Yup.string().required('Phone Number is required'),
