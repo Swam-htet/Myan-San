@@ -18,6 +18,11 @@ import Modal from "react-bootstrap/Modal";
 import TownForm from "@/components/general/TownForm";
 import CompanyForm from "@/components/general/CompanyForm";
 import toast from "react-hot-toast";
+import CompanyEditForm from "@/components/general/CompanyEditForm";
+import TownEditForm from "@/components/general/TownEditForm";
+import useUpdateStaffMutation from "@/libs/hooks/useUpdateStaffMutation";
+import useUpdateTownMutation from "@/libs/hooks/useUpdateTownMutation";
+import useUpdateCompanyMutation from "@/libs/hooks/useUpdateCompanyMutation";
 
 export default function GeneralListPage() {
 
@@ -28,11 +33,19 @@ export default function GeneralListPage() {
     const [showTownAddModal, setShowTownAddModal] = useState(false);
     const [showTownDeleteModal, setShowTownDeleteModal] = useState(false);
 
+    const [showTownEditModal, setShowTownEditModal] = useState(false);
+    const [showCompanyEditModal, setShowCompanyEditModal] = useState(false);
+
+
     const [showCompanyAddModal, setShowCompanyAddModal] = useState(false);
     const [showCompanyDeleteModal, setShowCompanyDeleteModal] = useState(false);
 
     const [townDeleteID, setTownDeleteID] = useState();
     const [companyDeleteID, setCompanyDeleteID] = useState();
+
+
+    const [townEditID, setTownEditID] = useState();
+    const [companyEditID, setCompanyEditID] = useState();
 
 
     const GetAllTowns = useGetAllTowns();
@@ -43,6 +56,11 @@ export default function GeneralListPage() {
 
     const CreateCompanyMutation = useCreateCompanyMutation();
     const CreateTownMutation = useCreateTownMutation();
+
+    let UpdateTownMutation = useUpdateTownMutation(townEditID);
+    let UpdateCompanyMutation = useUpdateCompanyMutation(companyEditID);
+
+
 
     useEffect(() => {
         if (GetAllCompanies.isSuccess) {
@@ -74,6 +92,25 @@ export default function GeneralListPage() {
         }
     }, [DeleteTownByIDMutation.isError, DeleteTownByIDMutation.isSuccess, DeleteTownByIDMutation.data]);
 
+    useEffect(() => {
+        if (UpdateCompanyMutation.isSuccess) {
+            toast.success("Company updated successfully")
+        }
+        if (UpdateCompanyMutation.isError) {
+            toast.error("Can't updated Company right now, please try again later");
+        }
+    }, [UpdateCompanyMutation.isError, UpdateCompanyMutation.isSuccess, UpdateCompanyMutation.data]);
+
+    useEffect(() => {
+        if (UpdateTownMutation.isSuccess) {
+            toast.success("Town updated successfully")
+        }
+        if (UpdateTownMutation.isError) {
+            toast.error("Can't updated town right now, please try again later");
+        }
+    }, [UpdateTownMutation.isError, UpdateTownMutation.isSuccess, UpdateTownMutation.data]);
+
+
     if (GetAllTowns.isLoading || GetAllCompanies.isLoading) {
         return <Loading/>
     }
@@ -91,6 +128,10 @@ export default function GeneralListPage() {
         setShowTownAddModal(!showTownAddModal);
     }
 
+    const editTownModalHandler = () => {
+        setShowTownEditModal(!showTownEditModal);
+    }
+
     const deleteTownModalHandler = (id) => {
         setTownDeleteID(id);
         setShowTownDeleteModal(!showTownDeleteModal);
@@ -100,19 +141,44 @@ export default function GeneralListPage() {
         setShowCompanyAddModal(!showCompanyAddModal);
     }
 
+    const editCompanyModalHandler = () => {
+        setShowCompanyEditModal(!showCompanyEditModal);
+    }
+
+
     const deleteCompanyModalHandler = (id) => {
         setCompanyDeleteID(id);
         setShowCompanyDeleteModal(!showCompanyDeleteModal);
     }
+    const editTownTableModalHandler = (id) => {
+        setTownEditID(id)
+        setShowTownEditModal(!showTownEditModal);
+    }
+
+    const editCompanyTableModalHandler = (id) => {
+        setCompanyEditID(id)
+        setShowCompanyEditModal(!showCompanyEditModal);
+    }
+
 
     const onSubmitForTownAddForm = (values) => {
         CreateTownMutation.mutate(values)
         setShowTownAddModal(!showTownAddModal)
     }
 
+    const onSubmitForTownEditForm = (values) => {
+        UpdateTownMutation.mutate(values)
+        setShowTownEditModal(!showTownEditModal)
+    }
+
     const onSubmitForCompanyAddForm = (values) => {
         CreateCompanyMutation.mutate(values);
         setShowCompanyAddModal(!showCompanyAddModal);
+    }
+
+    const onSubmitForCompanyEditForm = (values) => {
+        UpdateCompanyMutation.mutate(values);
+        setShowCompanyEditModal(!showCompanyEditModal);
     }
 
 
@@ -126,7 +192,9 @@ export default function GeneralListPage() {
                     </button>
                 </div>
                 {
-                    companyData && <CompanyTable townList={companyData} deleteModalHandler={deleteCompanyModalHandler}/>
+                    companyData && <CompanyTable editModalHandler={editCompanyTableModalHandler}
+                                                 townList={companyData}
+                                                 deleteModalHandler={deleteCompanyModalHandler}/>
                 }
             </div>
 
@@ -138,7 +206,9 @@ export default function GeneralListPage() {
                     </button>
                 </div>
                 {
-                    townData && <TownTable townList={townData} deleteModalHandler={deleteTownModalHandler}/>
+                    townData && <TownTable editModalHandler={editTownTableModalHandler}
+                                           townList={townData}
+                                           deleteModalHandler={deleteTownModalHandler}/>
                 }
             </div>
 
@@ -149,7 +219,17 @@ export default function GeneralListPage() {
                 <Modal.Body>
                     <CompanyForm onSubmit={onSubmitForCompanyAddForm} modelHandler={addCompanyModalHandler}/>
                 </Modal.Body>
+            </Modal>
 
+            <Modal show={showCompanyEditModal} onHide={editCompanyModalHandler}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Bus Company</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <CompanyEditForm id={companyEditID}
+                                     onSubmit={onSubmitForCompanyEditForm}
+                                     modelHandler={editCompanyModalHandler}/>
+                </Modal.Body>
             </Modal>
 
             <Modal show={showTownAddModal} onHide={addTownModalHandler}>
@@ -158,6 +238,17 @@ export default function GeneralListPage() {
                 </Modal.Header>
                 <Modal.Body>
                     <TownForm onSubmit={onSubmitForTownAddForm} modelHandler={addTownModalHandler}/>
+                </Modal.Body>
+
+            </Modal>
+            <Modal show={showTownEditModal} onHide={editTownModalHandler}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Town</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <TownEditForm id={townEditID}
+                                  onSubmit={onSubmitForTownEditForm}
+                                  modelHandler={editTownModalHandler}/>
                 </Modal.Body>
 
             </Modal>

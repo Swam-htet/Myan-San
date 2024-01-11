@@ -25,7 +25,6 @@ export default function RouteListPage() {
     const DeleteRouteByIDMutation = useDeleteRouteByIDMutation();
 
     const deleteModalHandler = (id) => {
-        console.log("Delete ID -", id);
         setDeleteID(id);
         setShowDeleteModal(!showDeleteModal);
     }

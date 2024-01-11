@@ -35,13 +35,13 @@ export default function RouteTable({routeList, deleteModalHandler}) {
                                 <td>{route.bus.driver.name}</td>
                                 <td>{route.bus.registrationNumber}</td>
                                 <td>{route.bus.company.name}</td>
-                                <td style={{cursor: "pointer"}} className={'text-success'}
+                                <td style={{cursor: "pointer"}} className={'bg-light text-primary'}
                                     onClick={() => router.push(`${path}/${route._id}`)}>
-                                    <FaMap/>
+                                    Detail <FaMap/>
                                 </td>
                                 <td style={{cursor: "pointer"}} className={'text-danger'}
                                     onClick={() => deleteModalHandler(route._id)}>
-                                    <AiFillDelete/>
+                                    Delete <AiFillDelete/>
                                 </td>
                             </tr>
                         )

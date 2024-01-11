@@ -1,24 +1,40 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {ErrorMessage, Field, Form, Formik} from 'formik';
 import * as Yup from 'yup';
 import {Button, Container} from 'react-bootstrap';
+import useGetTownByID from "@/libs/hooks/useGetTownByID";
 
-const TownForm = ({onSubmit, modelHandler}) => {
+const TownEditForm = ({id, onSubmit, modelHandler}) => {
+
+    const [data, setData] = useState();
+
+    const GetTownDetail = useGetTownByID(id);
+
+    useEffect(() => {
+        setData(GetTownDetail.data);
+    }, [GetTownDetail.isSuccess]);
+
+    if (GetTownDetail.isLoading) {
+        return 'Loading';
+    }
+    if (GetTownDetail.isError) {
+        return 'Error';
+    }
+
     const validationSchema = Yup.object({
         name: Yup.string().required('Name of the town is required'),
         station: Yup.string().required('Name of the station is required'),
     });
 
-    let initialFormValue = {
-        name: "",
-        station: "",
-    }
 
     return (
         <Container>
-            <Formik initialValues={initialFormValue}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmit}>
+            {data ? <Formik initialValues={{
+                name: data.name,
+                station: data.station,
+            }}
+                            validationSchema={validationSchema}
+                            onSubmit={onSubmit}>
                 <Form>
                     {/* First Name */}
                     <div className="mb-3">
@@ -41,13 +57,13 @@ const TownForm = ({onSubmit, modelHandler}) => {
                             Cancel
                         </Button>
                         <Button variant="primary" type={"submit"}>
-                            Add
+                            Save
                         </Button>
                     </div>
                 </Form>
-            </Formik>
+            </Formik> : "-"}
         </Container>
     );
 };
 
-export default TownForm;
+export default TownEditForm;

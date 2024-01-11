@@ -8,6 +8,8 @@ import {Accordion} from "react-bootstrap";
 import FaqForm from "@/components/faqs/FaqForm";
 import toast from "react-hot-toast";
 import useCreateFaqMutation from "@/libs/hooks/useCreateFaqMutation";
+import useDeleteFaqByIDMutation from "@/libs/hooks/useDeleteFaqByIDMutation";
+import {AiFillDelete} from "react-icons/ai";
 
 export default function GeneralListPage() {
     const [faqsData, setFaqsData] = useState(null);
@@ -17,6 +19,7 @@ export default function GeneralListPage() {
 
 
     const AddNewFaqMutation = useCreateFaqMutation();
+    const DeleteFaqMutation = useDeleteFaqByIDMutation();
 
     useEffect(() => {
         if (GetAllFaqs.isSuccess) {
@@ -34,6 +37,17 @@ export default function GeneralListPage() {
         }
     }, [AddNewFaqMutation.data,AddNewFaqMutation.isSuccess,AddNewFaqMutation.isError]);
 
+    useEffect(() => {
+
+        if(DeleteFaqMutation.isSuccess){
+            toast.success("Faq is deleted successfully");
+        }
+        if(DeleteFaqMutation.isError){
+            toast.error("Can't delete new Faq right now, try again later");
+        }
+    }, [DeleteFaqMutation.data,DeleteFaqMutation.isSuccess,DeleteFaqMutation.isError]);
+
+
     if (GetAllFaqs.isLoading) {
         return <Loading/>
     }
@@ -42,6 +56,9 @@ export default function GeneralListPage() {
         return <Error message={GetAllFaqs.error.message}/>
     }
 
+    const deleteFaqHandler = (id)=>{
+        DeleteFaqMutation.mutate(id);
+    }
 
     const addNewFaqHandler = values =>{
         AddNewFaqMutation.mutate(values);
@@ -61,7 +78,12 @@ export default function GeneralListPage() {
                         {
                             faqsData && faqsData.map((faq, index) => {
                                 return (<Accordion.Item eventKey={index} key={index}>
-                                    <Accordion.Header>{faq.question}</Accordion.Header>
+                                    <Accordion.Header>
+                                        <div className={'d-flex w-90 align-items-center'}>
+                                            {faq.question}
+                                            <button className={'ms-5 btn btn-outline-danger'} onClick={()=>deleteFaqHandler(faq._id)}><AiFillDelete/></button>
+                                        </div>
+                                    </Accordion.Header>
                                     <Accordion.Body>
                                         {
                                             faq.answer

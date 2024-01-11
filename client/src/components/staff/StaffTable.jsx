@@ -21,6 +21,8 @@ export default function StaffTable({editModalHandler,staffList, deleteModalHandl
                 <th scope="col">Address</th>
                 <th scope="col">Role</th>
                 <th scope="col"></th>
+                <th scope="col"></th>
+
 
             </tr>
             </thead>
@@ -37,13 +39,13 @@ export default function StaffTable({editModalHandler,staffList, deleteModalHandl
                                 <td>{dayjs(staff.startDate).format("MM/DD/YYYY")}</td>
                                 <td>{staff.address.street}, {staff.address.city}, {staff.address.state}</td>
                                 <td>{staff.role}</td>
-                                <td style={{cursor: "pointer"}} className={'text-success'}
+                                <td style={{cursor: "pointer", width: "80px"}} className={'text-success'}
                                     onClick={() => editModalHandler(staff._id)}>
-                                    <AiFillEdit/>
+                                    Edit <AiFillEdit/>
                                 </td>
-                                <td style={{cursor: "pointer"}} className={'text-danger'}
+                                <td style={{cursor: "pointer", width: "100px"}} className={'text-danger'}
                                     onClick={() => deleteModalHandler(staff._id)}>
-                                    <AiFillDelete/>
+                                    Delete <AiFillDelete/>
                                 </td>
                             </tr>
                         )

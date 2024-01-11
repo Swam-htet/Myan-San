@@ -63,6 +63,18 @@ async function staffLogin(req, res, next) {
     }
 }
 
+async function updateStaffByID(req, res, next) {
+    let id = req.params.id;
+    let body = req.body;
+
+    try {
+        let staff = await staffService.updateStaff(id,body);
+        res.status(200).send(staff);
+    } catch (err) {
+        console.log(err)
+        res.status(401).send({message: err.message});
+    }
+}
 
 async function deleteStaffByID(req, res, next) {
     let id = req.params.id;
@@ -82,6 +94,7 @@ async function deleteStaffByID(req, res, next) {
 // controller export
 module.exports = {
     getAllStaff,
+    updateStaffByID,
     getStaffByID,
     creatStaff,
     staffLogin,

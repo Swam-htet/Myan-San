@@ -26,6 +26,11 @@ async function createStaff(staff) {
     return newStaff.save();
 }
 
+async function updateStaff(id,staff) {
+    return Staff.findByIdAndUpdate(id, staff, {new: true});
+
+}
+
 async function deleteStaff(staffID) {
     let staff = await Staff.findByIdAndDelete(staffID);
     return staff;
@@ -57,4 +62,5 @@ module.exports = {
     getAllStaff,
     getStaffByID,
     createStaff,
+    updateStaff
 }

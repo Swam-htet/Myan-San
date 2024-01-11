@@ -1,9 +1,8 @@
 'use client';
 
-import {usePathname, useRouter} from "next/navigation";
-import {AiFillDelete} from "react-icons/ai";
+import {AiFillDelete, AiFillEdit} from "react-icons/ai";
 
-export default function CompanyTable({townList, deleteModalHandler}) {
+export default function CompanyTable({editModalHandler, townList, deleteModalHandler}) {
     return <>
         <table className="table table-bordered">
             <thead>
@@ -12,6 +11,7 @@ export default function CompanyTable({townList, deleteModalHandler}) {
                 <th scope="col">Name</th>
                 <th scope="col">Postal Code</th>
                 <th scope="col">Address</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -23,9 +23,13 @@ export default function CompanyTable({townList, deleteModalHandler}) {
                                 <td>{company.name}</td>
                                 <td>{company.address.postalCode}</td>
                                 <td>{company.address.street}, {company.address.city}, {company.address.state},</td>
+                                <td style={{cursor: "pointer"}} className={'text-success'}
+                                    onClick={() => editModalHandler(company._id)}>
+                                    Edit <AiFillEdit/>
+                                </td>
                                 <td style={{cursor: "pointer"}} className={'text-danger'}
                                     onClick={() => deleteModalHandler(company._id)}>
-                                    <AiFillDelete/>
+                                    Delete <AiFillDelete/>
                                 </td>
                             </tr>
                         )

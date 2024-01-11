@@ -13,7 +13,8 @@ import {IoMdAdd} from "react-icons/io";
 import StaffForm from "@/components/staff/StaffForm";
 import Loading from "@/components/layouts/Loading";
 import Error from "@/components/layouts/Error";
-import useUpdateStaffMutation from "@/libs/hooks/useUpdateBusMutation";
+import StaffEditForm from "@/components/staff/StaffEditForm";
+import useUpdateStaffMutation from "@/libs/hooks/useUpdateStaffMutation";
 
 export default function StaffListPage() {
     let router = useRouter();
@@ -34,7 +35,8 @@ export default function StaffListPage() {
         setShowAddModal(!showAddModal);
     }
 
-    const editModalHandler = () => {
+    const editModalHandler = (id) => {
+        setEditID(id)
         setShowEditModal(!showEditModal);
     }
 
@@ -50,7 +52,7 @@ export default function StaffListPage() {
 
     const submitEditHandler = (values) => {
         UpdateStaffMutation.mutate(values);
-        setShowAddModal(!showAddModal);
+        setShowEditModal(!showEditModal);
     }
 
 
@@ -97,7 +99,9 @@ export default function StaffListPage() {
 
         {data &&
             <div style={{overflowY: "scroll"}}>
-                <StaffTable editModalHandler={editModalHandler} staffList={data} deleteModalHandler={deleteModalHandler}/>
+                <StaffTable editModalHandler={editModalHandler}
+                            staffList={data}
+                            deleteModalHandler={deleteModalHandler}/>
             </div>}
 
         {/*     add new staff modal box     */}
@@ -116,12 +120,13 @@ export default function StaffListPage() {
                 <Modal.Title>Edit Staff</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <StaffForm onSubmit={submitEditHandler}
-                           modelHandler={editModalHandler}/>
+                <StaffEditForm
+                    id={editID}
+                    onSubmit={submitEditHandler}
+                    modelHandler={editModalHandler}/>
             </Modal.Body>
 
         </Modal>
-
 
 
         <DeleteConfirmModel message={`Doyouwanttodelete staffID -${deleteID}`}

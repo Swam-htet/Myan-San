@@ -29,14 +29,12 @@ export default function BusListPage() {
 	const [deleteID, setDeleteID] = useState();
 	const [editID, setEditID] = useState();
 
-	const [busData, setBusData] = useState();
 
 	// mutation and query
 	let GetAllBuses = useGetAllBuses();
 	let DeleteBusByIDMutation = useDeleteBusByIDMutation();
 	let CreateBusMutation = useCreateBusMutation();
 	let GetAllCompanies = useGetAllCompanies();
-	let GetBusByID = useGetBusByID(editID);
 	let UpdateBusMutation = useUpdateBusMutation(editID);
 
 	const addModalHandler = () => {
@@ -72,10 +70,6 @@ export default function BusListPage() {
 		console.log('Data list - ', data);
 		console.log(data ? data.filter((bus) => bus.id === editID) : {});
 	}, [editID]);
-
-	useEffect(() => {
-		setBusData(GetBusByID.data);
-	}, [GetBusByID.data, GetBusByID.data]);
 
 	useEffect(() => {
 		if (GetAllBuses.isSuccess) {

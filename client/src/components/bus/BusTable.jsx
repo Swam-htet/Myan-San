@@ -10,18 +10,20 @@ export default function BusTable({ busList, deleteModalHandler, editHandler }) {
 		<>
 			<table className='table table-bordered'>
 				<thead>
-					<tr>
-						<th scope='col'>ID</th>
-						<th scope='col'>Model</th>
-						<th scope='col'>Registration Number</th>
-						<th scope='col'>Class</th>
-						<th scope='col'>Driver</th>
-						<th scope='col'>Company</th>
-						<th scope='col'></th>
-					</tr>
+				<tr>
+					<th scope='col'>ID</th>
+					<th scope='col'>Model</th>
+					<th scope='col'>Registration Number</th>
+					<th scope='col'>Class</th>
+					<th scope='col'>Driver</th>
+					<th scope='col'>Company</th>
+					<th scope='col'></th>
+					<th scope='col'></th>
+
+				</tr>
 				</thead>
 				<tbody>
-					{busList.map((bus, index) => {
+				{busList.map((bus, index) => {
 						return (
 							<tr key={index}>
 								<td>{index + 1}</td>
@@ -35,7 +37,7 @@ export default function BusTable({ busList, deleteModalHandler, editHandler }) {
 
 								<td
 									style={{ cursor: 'pointer' }}
-									className={'text-primary'}
+									className={'text-success'}
 									onClick={() => editHandler(bus._id)}
 								>
 									Edit <AiFillEdit />
