@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 import useGetAllStaff from "@/libs/hooks/useGetAllStaff";
 import useDeleteStaffByIDMutation from "@/libs/hooks/useDeleteStaffByIDMutation";
 import toast from "react-hot-toast";
-
 import useCreateStaffMutation from "@/libs/hooks/useCreateStaffMutation";
 import DeleteConfirmModel from "@/components/shared/DeleteConfirmModel";
 import Modal from "react-bootstrap/Modal";
@@ -15,7 +14,6 @@ import StaffForm from "@/components/staff/StaffForm";
 import Loading from "@/components/layouts/Loading";
 import Error from "@/components/layouts/Error";
 import useUpdateStaffMutation from "@/libs/hooks/useUpdateBusMutation";
-
 
 export default function StaffListPage() {
     let router = useRouter();
@@ -60,7 +58,7 @@ export default function StaffListPage() {
         if (GetAllStaff.isSuccess) {
             setData(GetAllStaff.data);
         }
-    }, [GetAllStaff.data]);
+    }, [GetAllStaff.isSuccess]);
 
 
     useEffect(() => {
