@@ -38,14 +38,19 @@ export default function HomePage() {
     return (
         <main className={'container'}>
             <div className={'container-lg my-3 bg-light p-5 rounded'}>
-                <h4 className={'text-center text-primary'}>Search Trip</h4>
-                <div style={{width: "700px", margin: "0 auto"}}>
-                    <RouteSearchForm towns={data || []} onSubmit={onSearchRouteHandler}/>
+                <div className={'d-flex align-items-center'}>
+                    <div className={'col-6'}>
+                        <h2 className={'text-primary'}>Book Online Bus Ticket Around Myanmar</h2>
+                    </div>
+                    <div className={'col-6'}>
+                        <h4 className={'text-center text-primary'}>Search Trip</h4>
+                        <RouteSearchForm towns={data || []} onSubmit={onSearchRouteHandler}/>
+                    </div>
                 </div>
             </div>
 
             <div>
-                <Carousel>
+            <Carousel>
                     <Carousel.Item>
                         <Image src={"/slideShowImages/slidShow-1.jpg"} alt={'testing'} width={"1440"} height={'680'}/>
                         <Carousel.Caption>

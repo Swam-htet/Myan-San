@@ -14,6 +14,9 @@ import BusForm from "@/components/bus/BusForm";
 import useCreateBusMutation from "@/libs/hooks/useCreateBusMutation";
 import useGetAllCompanies from "@/libs/hooks/useGetAllCompany";
 import toast from "react-hot-toast";
+import useUpdateBusMutation from "@/libs/hooks/useUpdateBusMutation";
+import useGetBusByID from "@/libs/hooks/useGetBusByID";
+import BusEditForm from "@/components/bus/BusEditForm";
 
 export default function BusListPage() {
     let router = useRouter();
@@ -21,13 +24,22 @@ export default function BusListPage() {
     const [companies, setCompanies] = useState([])
 
     const [showAddModal, setShowAddModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [deleteID, setDeleteID] = useState();
 
+    const [deleteID, setDeleteID] = useState()
+    const [editID, setEditID] = useState();
+
+    const [busData, setBusData] = useState();
+
+
+    // mutation and query
     let GetAllBuses = useGetAllBuses();
     let DeleteBusByIDMutation = useDeleteBusByIDMutation();
     let CreateBusMutation = useCreateBusMutation();
     let GetAllCompanies = useGetAllCompanies();
+    let GetBusByID = useGetBusByID(editID);
+    let UpdateBusMutation = useUpdateBusMutation(editID);
 
     const addModalHandler = () => {
         setShowAddModal(!showAddModal);
@@ -41,9 +53,31 @@ export default function BusListPage() {
     const submitHandler = (values) => {
         CreateBusMutation.mutate(values);
         setShowAddModal(!showAddModal);
-
     }
 
+    const submitEditHandler = (values) => {
+        console.log("Values - ", values);
+        // UpdateBusMutation.mutate(values);
+        // setShowEditModal(!showEditModal);
+    }
+
+    const editModalHandler = () => {
+        setShowEditModal(!showEditModal);
+    }
+
+    const editHandler = (id) => {
+        setEditID(id);
+        setShowEditModal(!showEditModal);
+    }
+
+    useEffect(() => {
+        console.log("Data list - ", data);
+        console.log(data ? data.filter(bus => bus.id === editID) : {});
+    }, [editID]);
+
+    useEffect(() => {
+        setBusData(GetBusByID.data)
+    }, [GetBusByID.data, GetBusByID.data]);
 
     useEffect(() => {
         if (GetAllBuses.isSuccess) {
@@ -67,6 +101,17 @@ export default function BusListPage() {
         }
     }, [DeleteBusByIDMutation.data, DeleteBusByIDMutation.isError, DeleteBusByIDMutation.isSuccess]);
 
+    useEffect(() => {
+
+        if (UpdateBusMutation.isSuccess) {
+            toast.success("Updated Bus successfully");
+        }
+        if (UpdateBusMutation.isError) {
+            toast.error("Can't update bus right now, please try again later");
+        }
+    }, [UpdateBusMutation.data, UpdateBusMutation.isError, UpdateBusMutation.isSuccess]);
+
+
     if (GetAllBuses.isLoading || GetAllCompanies.isLoading) {
         return <Loading/>
     }
@@ -83,16 +128,30 @@ export default function BusListPage() {
                 </button>
             </div>
             {
-                data && <BusTable busList={data} deleteModalHandler={deleteModalHandler}/>
+                data && <BusTable busList={data} editHandler={editHandler} deleteModalHandler={deleteModalHandler}/>
             }
 
             {/*     add new bus modal box     */}
             <Modal show={showAddModal} onHide={addModalHandler} size={"xl"} scrollable={true}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Add New Bus</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <BusForm companyList={companies} onSubmitHandler={submitHandler} modelHandler={addModalHandler}/>
+                </Modal.Body>
+            </Modal>
+
+
+            {/*     edit bus modal box     */}
+            <Modal show={showEditModal} onHide={editModalHandler} size={"xl"} scrollable={true}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Bus</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <BusEditForm id={editID}
+                                 companyList={companies}
+                                 onSubmitHandler={submitEditHandler}
+                                 modelHandler={editModalHandler}/>
                 </Modal.Body>
             </Modal>
 

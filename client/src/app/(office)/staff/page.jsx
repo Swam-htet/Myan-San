@@ -14,22 +14,30 @@ import {IoMdAdd} from "react-icons/io";
 import StaffForm from "@/components/staff/StaffForm";
 import Loading from "@/components/layouts/Loading";
 import Error from "@/components/layouts/Error";
+import useUpdateStaffMutation from "@/libs/hooks/useUpdateBusMutation";
 
 
 export default function StaffListPage() {
     let router = useRouter();
     const [showAddModal, setShowAddModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [data, setData] = useState([]);
+
     const [deleteID, setDeleteID] = useState();
+    const [editID, setEditID] = useState();
 
     let GetAllStaff = useGetAllStaff();
     let DeleteStaffByIDMutation = useDeleteStaffByIDMutation();
     let CreateStaffMutation = useCreateStaffMutation();
-
+    let UpdateStaffMutation = useUpdateStaffMutation(editID);
 
     const addModalHandler = () => {
         setShowAddModal(!showAddModal);
+    }
+
+    const editModalHandler = () => {
+        setShowEditModal(!showEditModal);
     }
 
     const deleteModalHandler = (id) => {
@@ -39,6 +47,11 @@ export default function StaffListPage() {
 
     const submitHandler = (values) => {
         CreateStaffMutation.mutate(values);
+        setShowAddModal(!showAddModal);
+    }
+
+    const submitEditHandler = (values) => {
+        UpdateStaffMutation.mutate(values);
         setShowAddModal(!showAddModal);
     }
 
@@ -85,7 +98,8 @@ export default function StaffListPage() {
         </div>
 
         {data &&
-            <div style={{overflowY: "scroll"}}><StaffTable staffList={data} deleteModalHandler={deleteModalHandler}/>
+            <div style={{overflowY: "scroll"}}>
+                <StaffTable editModalHandler={editModalHandler} staffList={data} deleteModalHandler={deleteModalHandler}/>
             </div>}
 
         {/*     add new staff modal box     */}
@@ -98,6 +112,18 @@ export default function StaffListPage() {
             </Modal.Body>
 
         </Modal>
+
+        <Modal show={showEditModal} onHide={editModalHandler} size={"xl"} scrollable={true}>
+            <Modal.Header closeButton>
+                <Modal.Title>Edit Staff</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <StaffForm onSubmit={submitEditHandler}
+                           modelHandler={editModalHandler}/>
+            </Modal.Body>
+
+        </Modal>
+
 
 
         <DeleteConfirmModel message={`Doyouwanttodelete staffID -${deleteID}`}

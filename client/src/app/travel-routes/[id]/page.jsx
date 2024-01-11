@@ -20,6 +20,7 @@ export default function TravelRoutesPage({params}) {
     const [seatList, setSeatList] = useState([]);
     const [bookModel, setBookModel] = useState(false);
 
+
     const initialValues = {
         firstName: '',
         lastName: '',
@@ -144,7 +145,10 @@ export default function TravelRoutesPage({params}) {
                             </div>
                             {data.seats.map((seat) => (
                                 <div className={'col-3 p-2'} key={seat._id}>
-                                    <SeatCard data={seat} selectSeatHandler={selectSeatHandler} seatList={seatList}/>
+                                    <SeatCard display={false}
+                                              data={seat}
+                                              selectSeatHandler={selectSeatHandler}
+                                              seatList={seatList}/>
                                 </div>
                             ))}
                         </div>
@@ -165,7 +169,7 @@ export default function TravelRoutesPage({params}) {
                                                    routeData={data}
                                                    selectSeats={seatList}/>
                             </Modal.Body>
-                         
+
                         </Modal>
 
 

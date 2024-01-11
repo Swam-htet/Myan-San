@@ -144,18 +144,17 @@ export default function GeneralListPage() {
 
             <Modal show={showCompanyAddModal} onHide={addCompanyModalHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Company Form</Modal.Title>
+                    <Modal.Title>Add New Bus Company</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <CompanyForm onSubmit={onSubmitForCompanyAddForm} modelHandler={addCompanyModalHandler}/>
-
                 </Modal.Body>
 
             </Modal>
 
             <Modal show={showTownAddModal} onHide={addTownModalHandler}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Town Form</Modal.Title>
+                    <Modal.Title>Add New Town</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <TownForm onSubmit={onSubmitForTownAddForm} modelHandler={addTownModalHandler}/>

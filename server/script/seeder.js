@@ -153,7 +153,7 @@ db.once('open', async () => {
 
 
     // ticket fake data
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 80; i++) {
         let routeID = faker.helpers.arrayElement([...await Route.find()].map(route => route._id));
         let randomSeatNumber = Math.floor(Math.random() * 5) + 1;
         let route = await Route.findById(routeID);
@@ -183,7 +183,7 @@ db.once('open', async () => {
                 toTown: route.toTown,
                 fromTown: route.fromTown,
                 scheduleDate: route.scheduleDate,
-                availableSeat: 30 - randomSeatNumber,
+                availableSeat: availableSeats.length - randomSeatNumber,
                 seats: updatedSeats,
                 bus: route.bus,
             }

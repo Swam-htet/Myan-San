@@ -1,10 +1,10 @@
 'use client';
 
 import {usePathname, useRouter} from "next/navigation";
-import {AiFillDelete} from "react-icons/ai";
+import {AiFillDelete, AiFillEdit} from "react-icons/ai";
 import dayjs from "dayjs";
 
-export default function StaffTable({staffList, deleteModalHandler}) {
+export default function StaffTable({editModalHandler,staffList, deleteModalHandler}) {
     let router = useRouter();
     let path = usePathname();
     return <>
@@ -37,6 +37,10 @@ export default function StaffTable({staffList, deleteModalHandler}) {
                                 <td>{dayjs(staff.startDate).format("MM/DD/YYYY")}</td>
                                 <td>{staff.address.street}, {staff.address.city}, {staff.address.state}</td>
                                 <td>{staff.role}</td>
+                                <td style={{cursor: "pointer"}} className={'text-success'}
+                                    onClick={() => editModalHandler(staff._id)}>
+                                    <AiFillEdit/>
+                                </td>
                                 <td style={{cursor: "pointer"}} className={'text-danger'}
                                     onClick={() => deleteModalHandler(staff._id)}>
                                     <AiFillDelete/>

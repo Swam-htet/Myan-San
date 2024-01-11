@@ -20,16 +20,16 @@ const validationSchema = Yup.object().shape({
 
 const BusForm = ({data, onSubmitHandler,modelHandler,companyList}) => {
     const initialValues = {
-        registrationNumber: '',
-        make: '',
-        model: '',
-        year: '',
+        registrationNumber: data ? data.registrationNumber : '',
+        make: data ? data.make : '',
+        model: data ? data.model : '',
+        year: data ? data.year : '',
         driver: {
-            name: '',
-            licenseNumber: ''
+            name: data ? data.driver.name : '',
+            licenseNumber: data ? data.driver.licenseNumber : ''
         },
-        company: '',
-        class: ''
+        company: data ? data.company._id : '',
+        class: data ? data.class : ''
     };
     return (
         <Formik
@@ -41,38 +41,39 @@ const BusForm = ({data, onSubmitHandler,modelHandler,companyList}) => {
                 <div className={'mt-2'}>
                     <label htmlFor="registrationNumber">Registration Number</label>
                     <Field type="text" name="registrationNumber" placeholder="Enter Registration Number"
-                           class={'form-control mb-1'}/>
+                           className={'form-control mb-1'}/>
                     <ErrorMessage name="registrationNumber" component="div" className="text-danger"/>
                 </div>
 
                 <div className={'mt-2'}>
                     <label htmlFor="make">Make</label>
-                    <Field type="text" name="make" placeholder="Enter Make" class={'form-control mb-1'}/>
+                    <Field type="text" name="make" placeholder="Enter Make" className={'form-control mb-1'}/>
                     <ErrorMessage name="make" component="div" className="text-danger"/>
                 </div>
 
                 <div className={'mt-2'}>
                     <label htmlFor="model">Model</label>
-                    <Field type="text" name="model" placeholder="Enter Model" class={'form-control mb-1'}/>
+                    <Field type="text" name="model" placeholder="Enter Model" className={'form-control mb-1'}/>
                     <ErrorMessage name="model" component="div" className="text-danger"/>
                 </div>
 
                 <div className={'mt-2'}>
                     <label htmlFor="year">Year</label>
-                    <Field type="text" name="year" placeholder="Enter Year" class={'form-control mb-1'}/>
+                    <Field type="text" name="year" placeholder="Enter Year" className={'form-control mb-1'}/>
                     <ErrorMessage name="year" component="div" className="text-danger"/>
                 </div>
 
                 <div className={'mt-2'}>
                     <label htmlFor="driver.name">Driver Name</label>
-                    <Field type="text" name="driver.name" placeholder="Enter Driver Name" class={'form-control mb-1'}/>
+                    <Field type="text" name="driver.name" placeholder="Enter Driver Name"
+                           className={'form-control mb-1'}/>
                     <ErrorMessage name="driver.name" component="div" className="text-danger"/>
                 </div>
 
                 <div className={'mt-2'}>
                     <label htmlFor="driver.licenseNumber">License Number</label>
                     <Field type="text" name="driver.licenseNumber" placeholder="Enter Driver License Number"
-                           class={'form-control mb-1'}/>
+                           className={'form-control mb-1'}/>
                     <ErrorMessage name="driver.licenseNumber" component="div" className="text-danger"/>
                 </div>
 

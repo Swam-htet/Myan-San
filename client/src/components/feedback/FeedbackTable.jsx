@@ -1,5 +1,7 @@
 'use client';
 
+import dayjs from "dayjs";
+
 export default function FeedbackTable({data}) {
     return <>
         <table className="table table-bordered">
@@ -9,6 +11,8 @@ export default function FeedbackTable({data}) {
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Feedback</th>
+                <th scope="col">Created At</th>
+
             </tr>
             </thead>
             <tbody>
@@ -19,6 +23,8 @@ export default function FeedbackTable({data}) {
                                 <td>{item.customer.name}</td>
                                 <td>{item.customer.email}</td>
                                 <td>{item.feedback}</td>
+                                <td>{dayjs(item.created_at).format("DD/MM/YYYY HH:mm:ss")}</td>
+
 
                             </tr>
                         )

@@ -3,9 +3,10 @@
 import LoginForm from "@/components/login/LoginForm";
 import useStaffLogin from "@/libs/hooks/useStaffLogin";
 import {useEffect} from "react";
-import {getCookie, setCookie} from "cookies-next";
+import {setCookie} from "cookies-next";
 import {useRouter} from "next/navigation";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 
 export default function LoginPage() {
@@ -31,10 +32,14 @@ export default function LoginPage() {
     }, [StaffLoginMutation.data, StaffLoginMutation.isSuccess,StaffLoginMutation.isError]);
 
     return (
-        <main className={'container py-4'}>
-            <h1 className={'text-center'}>Staff Login</h1>
-            <div style={{maxWidth:"600px",margin:"0 auto"}}>
+        <main className={'container d-flex my-3'} style={{minHeight: "50vh"}}>
+            <div className={'col-12 col-md-5 bg-light p-4 rounded'}>
+                <h1 className={'text-start'}>Login</h1>
+
                 <LoginForm handleSubmit={handleSubmit}/>
+            </div>
+            <div className={'col-7 d-md-block d-none'}>
+                <Image src={"/slideShowImages/slidShow-2.jpg"} alt={'testing'} width={"700"} height={'680'}/>
             </div>
 
         </main>

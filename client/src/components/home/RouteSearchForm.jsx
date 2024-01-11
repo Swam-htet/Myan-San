@@ -21,13 +21,13 @@ function RouteSearchForm({onSubmit, towns}) {
             validationSchema={validationSchema}
             onSubmit={(values) => onSubmit(values)}
         >
-            <Form>
+            <Form className={'w-100'}>
 
 
                 {/* From Town Select */}
                 <BootstrapForm.Group controlId="fromTown" className={'mb-3'}>
                     <BootstrapForm.Label>From Town:</BootstrapForm.Label>
-                    <Field as="select" name="fromTown" className="form-control">
+                    <Field as="select" name="fromTown" className="form-control w-100">
                         <option value="">Select From Town</option>
                         {
                             towns.map((town, index) => <option key={index}

@@ -20,6 +20,10 @@ const FeedbackSchema = new Schema({
     feedback: {
         type: String,
         required: true
+    },
+    created_at: {
+        type: Date,
+        required: true
     }
 
 });

@@ -5,39 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c857e01a-0162-4f0a-9cb0-c29cf17f422b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/feedbacks/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/app/(office)/routes/[id]/page.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/feedback/FeedbackTable.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/home/RouteSearchForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/travel-route/RouteForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useCreateRouteMutation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useGellAllFeedback.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/bus/BusEditForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useGetBusByID.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useUpdateBusMutation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/buses/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/buses/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/app/(office)/general/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/general/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/routes/[id]/page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/routes/new/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/routes/new/page.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/routes/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/routes/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/routes/[id]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/routes/[id]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/staff/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/staff/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/login/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/login/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/app/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/travel-routes/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/travel-routes/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/home/TicketSearchForm.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layouts/DashboardLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layouts/DashboardLayout.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layouts/Loading.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layouts/Loading.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/libs/hooks/useGetAllRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/libs/hooks/useGetAllRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/faq.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/faq.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/feedback.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/feedback.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/route.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/route.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/ticket.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/ticket.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/faq.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/faq.model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/app/travel-routes/[id]/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/travel-routes/[id]/page.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/bus/BusForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/bus/BusForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/bus/BusTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/bus/BusTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/feedback/FeedbackTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/feedback/FeedbackTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/home/RouteSearchForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/home/RouteSearchForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layouts/FooterLayout.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layouts/FooterLayout.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/staff/StaffForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/staff/StaffForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/staff/StaffTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/staff/StaffTable.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/travel-route/SeatCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/travel-route/SeatCard.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/libs/hooks/useCreateBusMutation.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/libs/hooks/useCreateBusMutation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/models/feedback.model.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/feedback.model.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/faq.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/faq.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/feedback.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/feedback.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/ticket.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/ticket.route.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/script/seeder.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/script/seeder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/services/faq.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/faq.service.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/services/feedback.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/feedback.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/services/route.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/route.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/services/ticket.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/ticket.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +39,8 @@
       <list>
         <option value="CSS File" />
         <option value="TypeScript File" />
-        <option value="JavaScript File" />
         <option value="JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -81,7 +71,7 @@
     "git-widget-placeholder": "main",
     "javascript.nodejs.core.library.configured.version": "21.1.0",
     "javascript.nodejs.core.library.typings.version": "20.10.4",
-    "last_opened_file_path": "/Users/swamhtet/Desktop/programming/application and projects/Myan-San/client/src/libs/hooks",
+    "last_opened_file_path": "/Users/swamhtet/Desktop/programming/application and projects/Myan-San/client/src/components/bus",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -95,11 +85,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client/src/components/bus" />
       <recent name="$PROJECT_DIR$/client/src/libs/hooks" />
       <recent name="$PROJECT_DIR$/client/src/app/(office)/feedbacks" />
       <recent name="$PROJECT_DIR$/client/src/app/(office)/setting" />
       <recent name="$PROJECT_DIR$/client/public/profiles" />
-      <recent name="$PROJECT_DIR$/client/src/app/(office)" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/client/src/app/(office)" />
@@ -194,7 +184,23 @@
       <workItem from="1703961188171" duration="607000" />
       <workItem from="1704046323521" duration="26000" />
       <workItem from="1704046355959" duration="8074000" />
-      <workItem from="1704125122734" duration="19233000" />
+      <workItem from="1704125122734" duration="19567000" />
+      <workItem from="1704163549930" duration="10000" />
+      <workItem from="1704208311278" duration="839000" />
+      <workItem from="1704262227322" duration="42000" />
+      <workItem from="1704262361293" duration="223000" />
+      <workItem from="1704278200699" duration="793000" />
+      <workItem from="1704350118487" duration="296000" />
+      <workItem from="1704350418773" duration="10000" />
+      <workItem from="1704350539751" duration="770000" />
+      <workItem from="1704553793664" duration="8101000" />
+      <workItem from="1704644227260" duration="562000" />
+      <workItem from="1704681707325" duration="532000" />
+      <workItem from="1704722646802" duration="1590000" />
+      <workItem from="1704816354913" duration="1213000" />
+      <workItem from="1704855426884" duration="445000" />
+      <workItem from="1704856397596" duration="291000" />
+      <workItem from="1704897559711" duration="13466000" />
     </task>
     <servers />
   </component>
@@ -276,7 +282,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/client/src/app/(office)/general/page.jsx</url>
-          <line>171</line>
+          <line>170</line>
           <option name="timeStamp" value="30" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

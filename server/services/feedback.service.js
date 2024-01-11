@@ -8,7 +8,7 @@ async function getAllFeedback() {
 
 // create feedback
 async function createFeedback(feedback) {
-    return new Feedback(feedback).save();
+    return new Feedback({...feedback, created_at: new Date()}).save();
 }
 
 

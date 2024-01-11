@@ -23,21 +23,21 @@ const StaffForm = ({data: initialValue, onSubmit, modelHandler}) => {
     });
 
     let initialFormValue = {
-        firstName: initialValue ? initialValue.firstName : "",
-        lastName: initialValue ? initialValue.lastName : "",
-        userName: initialValue ? initialValue.userName : "",
-        dateOfBirth: initialValue ? initialValue.dateOfBirth : "",
-        startDate: initialValue ? initialValue.startDate : "",
+        firstName: "",
+        lastName: "",
+        userName: "",
+        dateOfBirth: "",
+        startDate: "",
         address: {
-            street: initialValue ? initialValue.address.street : "",
-            city: initialValue ? initialValue.address.city : "",
-            state: initialValue ? initialValue.address.state : "",
-            postalCode: initialValue ? initialValue.address.postalCode : "",
-            country: initialValue ? initialValue.address.country : "",
+            street: "",
+            city: "",
+            state: "",
+            postalCode: "",
+            country: "",
         },
-        password: initialValue ? initialValue.password : "",
-        email: initialValue ? initialValue.email : "",
-        role: initialValue ? initialValue.role : "",
+        password: "",
+        email: "",
+        role: "",
     }
 
     return (
