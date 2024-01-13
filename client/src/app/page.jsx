@@ -68,8 +68,8 @@ export default function HomePage() {
               height={"680"}
             />
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <h3>Discover New Destinations</h3>
+              <p>Book your journey with Myan San for convenient travel to exciting destinations!</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -80,8 +80,8 @@ export default function HomePage() {
               height={"680"}
             />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <h3>Exclusive Deals Await</h3>
+              <p>Unlock savings with Myan San's exclusive deals on unforgettable travel experiences!</p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
@@ -94,29 +94,28 @@ export default function HomePage() {
               />
             </div>
             <Carousel.Caption>
-              <h3>Third slide label</h3>
+              <h3>Easy, Seamless Booking</h3>
               <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
+                Enjoy a hassle-free booking experience – from seat selection to secure payments, Myan San has it all!              </p>
             </Carousel.Caption>
           </Carousel.Item>
 
-          <Carousel.Item>
-            <div className={"row justify-content-center"}>
-              <Image
-                src={"/slideShowImages/slidShow-4.jpg"}
-                alt={"testing"}
-                width={"1440"}
-                height={"680"}
-              />
-            </div>
-            <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-              </p>
-            </Carousel.Caption>
-          </Carousel.Item>
+          {/*<Carousel.Item>*/}
+          {/*  <div className={"row justify-content-center"}>*/}
+          {/*    <Image*/}
+          {/*      src={"/slideShowImages/slidShow-4.jpg"}*/}
+          {/*      alt={"testing"}*/}
+          {/*      width={"1440"}*/}
+          {/*      height={"680"}*/}
+          {/*    />*/}
+          {/*  </div>*/}
+          {/*  <Carousel.Caption>*/}
+          {/*    <h3>Third slide label</h3>*/}
+          {/*    <p>*/}
+          {/*      Praesent commodo cursus magna, vel scelerisque nisl consectetur.*/}
+          {/*    </p>*/}
+          {/*  </Carousel.Caption>*/}
+          {/*</Carousel.Item>*/}
         </Carousel>
       </div>
     </main>
