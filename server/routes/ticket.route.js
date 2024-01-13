@@ -8,6 +8,4 @@ router.get("/:id", ticketController.getTicketByID);
 router.post("/", ticketController.createTicket);
 router.delete("/:id", ticketController.deleteTicketByID);
 
-
-
 module.exports = router;

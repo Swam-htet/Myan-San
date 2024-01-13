@@ -7,10 +7,8 @@ let cors = require("cors");
 let dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
-
 // custom middleware imports
 let middleware = require("./middleware/");
-
 
 // route imports
 let indexRouter = require("./routes/index");
@@ -23,13 +21,7 @@ let ticketRouter = require("./routes/ticket.route");
 let faqRouter = require("./routes/faq.route");
 let feedbackRouter = require("./routes/feedback.route");
 
-
-const {checkRole, verifyUserToken} = require("./middleware");
-
-
-
-
-
+const { checkRole, verifyUserToken } = require("./middleware");
 
 // create express app
 let app = express();
@@ -44,25 +36,21 @@ app.set("view engine", "jade");
 // middleware setup
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
 
 // db configuration
 mongoose
-    .connect(process.env.DB, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => {
-        console.log("MongoDB atlas connected");
-    })
-    .catch(console.log);
-
-
-
-
+  .connect(process.env.DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("MongoDB atlas connected");
+  })
+  .catch(console.log);
 
 // open routes
 app.use("/", indexRouter);
@@ -72,7 +60,6 @@ app.use("/api/staff", staffRouter);
 // auth middleware test
 // app.use(verifyUserToken, checkRole("admin"));
 
-
 // authenticated routes
 app.use("/api/buses", busRouter);
 app.use("/api/companies", companyRouter);
@@ -81,12 +68,6 @@ app.use("/api/routes", travelRouter);
 app.use("/api/tickets", ticketRouter);
 app.use("/api/faqs", faqRouter);
 app.use("/api/feedbacks", feedbackRouter);
-
-
-
-
-
-
 
 // catch 404 and forward to error handler
 app.use(middleware.NotFound);

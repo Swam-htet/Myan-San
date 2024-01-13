@@ -9,6 +9,4 @@ router.post("/", faqController.createFaq);
 
 router.delete("/:id", faqController.deleteFaqByID);
 
-
-
 module.exports = router;

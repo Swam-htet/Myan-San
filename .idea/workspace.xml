@@ -4,39 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c857e01a-0162-4f0a-9cb0-c29cf17f422b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/src/components/general/CompanyEditForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/general/TownEditForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/components/staff/StaffEditForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useDeleteFaqByIDMutation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useGetCompanyByID.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useGetStaffByID.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useGetTownByID.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useUpdateCompanyMutation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useUpdateStaffMutation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/libs/hooks/useUpdateTownMutation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/buses/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/buses/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/general/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/general/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/routes/edit/[id]/page.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/routes/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/routes/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/settings/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/settings/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/app/(office)/staff/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/app/(office)/staff/page.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/bus/BusTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/bus/BusTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/general/CompanyForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/general/CompanyForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/general/CompanyTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/general/CompanyTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/general/TownForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/general/TownForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/general/TownTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/general/TownTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/staff/StaffTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/staff/StaffTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/travel-route/RouteTable.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/travel-route/RouteTable.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/libs/hooks/useUpdateBusMutation.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/libs/hooks/useUpdateBusMutation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/faq.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/faq.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/staff.controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/staff.controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/faq.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/faq.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/routes/staff.route.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/routes/staff.route.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/services/faq.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/faq.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/services/staff.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/services/staff.service.js" afterDir="false" />
-    </list>
+    <list default="true" id="c857e01a-0162-4f0a-9cb0-c29cf17f422b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -209,7 +177,7 @@
       <workItem from="1704855426884" duration="445000" />
       <workItem from="1704856397596" duration="291000" />
       <workItem from="1704897559711" duration="13466000" />
-      <workItem from="1704992025890" duration="7444000" />
+      <workItem from="1704992025890" duration="7691000" />
     </task>
     <servers />
   </component>
